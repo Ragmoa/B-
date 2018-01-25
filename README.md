@@ -34,10 +34,10 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
  - [ ] Joueur_humain (Hérite de Joueur)
     - *Constructeur*
     - *Liste de cases valides pour le tir*
-    - *Fin de tour*
 
 
   - [ ] Joueur_IA (Hérite de Joueur)
+    - *Constructeur*
     - *Jouer en temps qu'IA*
 
 
@@ -49,4 +49,4 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
 ### Mécaniques
 - Il faut toucher un bateau sur des cases différentes pour lui infliger des dégats.
 - Si on retouche un bateau a une case detruite, le joueur ne peut pas déplacer ses bateaux.
-- A plus de 2 cases détruites, le bateau est coulé
+- A plus de 2 cases détruites, le bateau est coulé.
