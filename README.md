@@ -10,8 +10,8 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
       - Case Haut-Gauche
       - Horizontal/Vertical
       - Liste de cases touchées
-      - Portée
-      - Taille
+      - **Portée**
+      - **Taille**
       - *Constructeur*
       - *Cases occupées*
       - *Cases a portée*
@@ -19,7 +19,7 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
 
 - [ ] Joueur (Abstraite)
     - Liste de Bateaux
-    - Tableau de cases touchées/ratées
+    - Tableau de cases touchées/ratéses
     - Peut se déplacer a ce tour-ci
     - Dernière case jouée par l'adversaire.
     - *Constructeur*
