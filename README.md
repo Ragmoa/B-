@@ -6,25 +6,28 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
 
 ### Classes
 
-
  - [ ] Bateau
       - Case Haut-Gauche
       - Horizontal/Vertical
       - Liste de cases touchées
       - Portée
       - Taille
-
-
-- [ ] Tableau
-    - Cases Touchées
+      - *Constructeur*
+      - *Cases occupées*
+      - *Cases a portée*
 
 
 - [ ] Joueur
     - Liste de Bateaux
-    - Tableau de cases touchées
+    - Tableau de cases touchées/ratées
     - Peut se déplacer a ce tour-ci
     - Est une IA
-    - Denière case jouée par l'adversaire.
+    - Dernière case jouée par l'adversaire.
+    - *Constructeur*
+    - *Tir*
+    - *Déplacer*
+    - *Liste de cases vaildes pour le déplacement du bateau*
+    -
 
 
  - [ ] Main
