@@ -5,13 +5,18 @@
 Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'UQAC.
 
 ### Classes
-- [ ] Bateau
+
+
+ - [ ] Bateau
       - Case Haut-Gauche
       - Joueur
       - Horizontal/Vertical
       - Liste de cases touchées
       - Portée
--
+
+
+- [ ] Tableau
+    - Cases Touchées
 
 
 
