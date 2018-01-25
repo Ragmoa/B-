@@ -17,7 +17,7 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
       - *Cases a portée*
 
 
-- [ ] Joueur
+- [ ] Joueur (Abstraite)
     - Liste de Bateaux
     - Tableau de cases touchées/ratées
     - Peut se déplacer a ce tour-ci
@@ -26,8 +26,14 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
     - *Constructeur*
     - *Tir*
     - *Déplacer*
-    - *Liste de cases vaildes pour le déplacement du bateau*
-    -
+
+  - [ ] Joueur_humain (Hérite de Joueur)
+      - *Constructeur*
+      - *Liste de cases vaildes pour le déplacement du bateau*
+      - *Listes de cases valides pour le tir*
+
+  - [ ] Joueur_IA (Hérite de Joueur)
+      - *Jouer en temps qu'IA*
 
 
  - [ ] Main
