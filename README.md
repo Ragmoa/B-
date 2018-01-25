@@ -9,7 +9,6 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
 
  - [ ] Bateau
       - Case Haut-Gauche
-      - Joueur
       - Horizontal/Vertical
       - Liste de cases touchées
       - Portée
