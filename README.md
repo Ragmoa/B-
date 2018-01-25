@@ -19,10 +19,9 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
 
 - [ ] Joueur (Abstraite)
     - Liste de Bateaux
-    - Tableau de cases touchées/ratéses
+    - Tableau de cases touchées/ratées
     - Peut se déplacer a ce tour-ci
     - Dernière case jouée par l'adversaire.
-    - *Constructeur*
     - *Tir*
     - *Déplacer*
     - *Liste de cases valides pour le déplacement d'un bateau*
