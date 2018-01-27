@@ -7,12 +7,12 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
 ### Classes
 
  - [ ] Bateau
-      - Case Haut-Gauche
-      - Horizontal/Vertical
-      - Liste de cases touchées
-      - **Portée**
-      - **Taille**
-      - *Constructeur*
+      - ~~Case Haut-Gauche~~
+      - ~~Horizontal/Vertical~~
+      - ~~Liste de cases touchées~~
+      - ~~**Portée**~~
+      - ~~**Taille**~~
+      - ~~*Constructeur*~~
       - *Cases occupées*
       - *Cases a portée*
       - *Doit être coulé*
