@@ -43,5 +43,19 @@ public class Boat {
     public int get_portee(){
       return portee;
     }
+    public int[][] cases_ocupees(){
+      int[][] cases=new int[taille][2];
+      int i=0;
+      for (i=0;i<taille;i++){
+        if (this.horizontal){
+        cases[i][0]=this.position[0]+i;
+        cases[i][1]=this.position[1];
+      }else {
+        cases[i][0]=this.position[0];
+        cases[i][1]=this.position[1]+i;
+      }
+      }
+      return cases;
+    }
 
 }
