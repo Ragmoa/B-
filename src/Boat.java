@@ -14,4 +14,34 @@ public class Boat {
       this.cases_touchees=new boolean[taille];
     }
 
+    public void set_position(int[] position){
+       this.position=position;
+    }
+    public int[] get_position(){
+      return position;
+    }
+    public boolean is_horizontal(){
+      return horizontal;
+    }
+    public void hit(int c){
+      if (c<0 && c>taille){
+        return;
+      } else{
+        this.cases_touchees[c]=true;
+      }
+    }
+    public boolean is_hit(int c){
+      if (c<0 && c>taille){
+        return false;
+      } else{
+        return cases_touchees[c];
+      }
+    }
+    public int get_taille(){
+      return taille;
+    }
+    public int get_portee(){
+      return portee;
+    }
+
 }
