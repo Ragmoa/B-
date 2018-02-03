@@ -6,7 +6,7 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
 
 ### Classes
 
- - [ ] Bateau
+ - [X] ~~Bateau~~
       - ~~Case Haut-Gauche~~
       - ~~Horizontal/Vertical~~
       - ~~Liste de cases touchées~~
@@ -14,8 +14,8 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
       - ~~**Taille**~~
       - ~~*Constructeur*~~
       - ~~*Cases occupées*~~
-      - *Cases a portée*
-      - *Doit être coulé*
+      - ~~*Cases a portée*~~
+      - ~~*Doit être coulé*~~
 
 - [ ] Joueur (Abstraite)
     - Liste de Bateaux
