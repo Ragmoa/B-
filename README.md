@@ -13,7 +13,7 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
       - ~~**Portée**~~
       - ~~**Taille**~~
       - ~~*Constructeur*~~
-      - *Cases occupées*
+      - ~~*Cases occupées*~~
       - *Cases a portée*
       - *Doit être coulé*
 
