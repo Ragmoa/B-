@@ -10,6 +10,8 @@ import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.VLineTo;
 import javafx.stage.Stage;
+import modele.Content;
+import modele.Case;
 
 public class Plateau extends Application {
 	
@@ -33,8 +35,8 @@ public class Plateau extends Application {
 				 		
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				plateau1[j][i] = new Case(Content.sea);
-				plateau2[j][i] = new Case(Content.sea);
+				plateau1[j][i] = new Case(Content.sea,i,j);
+				plateau2[j][i] = new Case(Content.sea,i,j);
 			}
 		}
 	}
