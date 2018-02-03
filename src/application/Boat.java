@@ -1,5 +1,3 @@
-package application;
-
 public class Boat {
 
     private int[] position; //Représente la case la plus haut, en vertical ou le plus a gauche en Horizontal.

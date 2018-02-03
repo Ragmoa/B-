@@ -56,32 +56,37 @@ public class Joueur {
 	
 	
 	 public void placer_bateau(int x , int y){
-		 int[][] cases=new int[17][2];		 
-		 int pos[] = {x,y};
-		 int k = 0;
-		 for(int i = 0; i < 5 ; i++) {
-			 if(i==0)
-			 {
-				 
-				 if((bateaux[i].get_taille()+x < 10 && bateaux[i].is_horizontal()) || (bateaux[i].get_taille()+y < 10 && !bateaux[i].is_horizontal() ))
-				 { 
-					 bateaux[i].set_position(pos);
-					 for(int j = 0 ; j < bateaux[i].get_taille() ; j++) {
-						 cases[k][0]=bateaux[i].cases_ocupees()[j][0];
-						 cases[k][0]=bateaux[i].cases_ocupees()[j][1];
-					 }
-				 }
-			 }
-			 else
-				 if((bateaux[i].get_taille()+x < 10 && bateaux[i].is_horizontal()) || (bateaux[i].get_taille()+y < 10 && !bateaux[i].is_horizontal() ))
-					 if(bateaux[i].get)
-			 
-			 
-			 bateaux[i].set_position(pos);
-			 bateaux[i].cases_ocupees();
-		 }
-		 
+
+		 for(int i = 0; i < 5 ; i++);
 	    }
 	    
-
+	    public void update_boat(Boat bateau, PlateauJeu plate) {
+	    	int posi[][] = bateau.cases_ocupees();
+	    	for(int i = 0 ;  i < posi[0].length ; i++) {
+	    		for(int j = 0 ; j < posi[1].length ; j++) {
+	    				plate.getCase(posi[i][0], posi[j][1]).setTypeC(Content.boat);
+	    		}  		
+	    	}
+	    }
+	    
+	    public void tirer(PlateauJeu plate, int i, int j) {
+	    	if(plate.getCase(i,j).getTypeC()==Content.boat) {
+	    		plate.getCase(i, j).setTypeC(Content.boat_hit);
+	    		System.out.println("touché");
+	    	}
+	    	else if(plate.getCase(i, j).getTypeC()==Content.boat_hit) {
+	    		System.out.println("bateau déjà abimé");	    			    		
+	    	}
+	    	else
+	    		System.out.println("raté");
+	    }
+	    
+	    public void select_bateau(PlateauJeu plate, int i, int j) {
+	    	if(plate.getCase(i,j).getTypeC()==Content.boat) {
+	    		
+	    	}
+	    }
+	    public void bouger(PlateauJeu plate, int i, int j){
+	    	
+	    }
 }
