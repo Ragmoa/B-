@@ -106,6 +106,43 @@ public class Carre extends Parent{
     
     public void majCarre(Content contenu)
     {
+    	Rectangle fondCarre = new Rectangle(0,0,84,84);
+		fondCarre.setFill(Color.WHITE);
+		fondCarre.setStroke(Color.BLACK);
+      
+		switch(contenu) {
+ 		case boat:
+ 			fondCarre.setFill(Color.WHITE);
+ 			break;
+ 		case boat_hit:
+ 			fondCarre.setFill(Color.BLACK);
+ 			break;
+ 		case boat_range:
+ 			fondCarre.setFill(Color.RED);
+ 			break;
+ 		case hit:
+ 			break;
+ 		case miss:
+ 			break;
+ 		case sea:
+ 			fondCarre.setFill(Color.LIGHTBLUE);
+ 			this.setOnMouseEntered(new EventHandler<MouseEvent>(){
+ 	            public void handle(MouseEvent me){
+ 	                fondCarre.setFill(Color.GREY);
+ 	                fondCarre.setStroke(Color.BLACK);
+ 	            }
+ 	        });
+
+ 	        this.setOnMouseExited(new EventHandler<MouseEvent>(){
+ 	            public void handle(MouseEvent me){
+ 	                fondCarre.setFill(Color.LIGHTBLUE);
+ 	                fondCarre.setStroke(Color.BLACK);
+ 	            }
+ 	        }); 
+ 			break;
+ 		default:
+ 			break;
+        }
 //    	//on change l'affichage et le comportement en fonction du (nouveau) contenu de sa case
 //        Rectangle fondCarre = new Rectangle(0,0,84,84);
 //        fondCarre.setFill(Color.WHITE);

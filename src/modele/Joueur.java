@@ -81,7 +81,7 @@ public class Joueur {
 					if (this.bateaux[i]!=null){
 						for (j=0;j<this.bateaux[i].get_taille();j++){
 							for (k=0,k<b.get_taille();k++){
-								if (b.cases_ocupees()[k][0]==this.bateaux[i].cases_ocupees[j][0] && b.cases_ocupees()[k][1]==this.bateaux[i].cases_ocupees[j][1]){
+								if (b.cases_ocupees()[k][0]==this.bateaux[i].cases_ocupees()[j][0] && b.cases_ocupees()[k][1]==this.bateaux[i].cases_ocupees()[j][1]){
 									return true;
 								}
 							}
@@ -91,13 +91,13 @@ public class Joueur {
 				return false;
 			}
 
-			public check_collision (Boat b, int x, int y){
+			public boolean check_collision (Boat b, int x, int y){
 
 			}
 	    public Boat select_bateau(int x, int y) {//TODO: Déplacer dans Joueur_humain
 	        int i=0, j=0;
 	          for (i=0;i<5;i++){
-	            for (j=0;j<this.bateaux[i].taille;j++){
+	            for (j=0;j<this.bateaux[i].get_taille();j++){
 	              if (x==this.bateaux[i].cases_ocupees()[j][0] && y==this.bateaux[i].cases_ocupees()[j][1]){
 	                return this.bateaux[i];
 	              }
