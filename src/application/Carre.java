@@ -25,7 +25,7 @@ public class Carre extends Parent{
     int ligne;
     int colonne;    
     
-    public Carre(Boolean player, Content contenu, int ligne, int colonne){
+    public Carre(Boolean player, Content contenu, int colonne, int ligne){
     	this.playerSide=player;
     	this.ligne=ligne;
     	this.colonne=colonne;
@@ -88,13 +88,6 @@ public class Carre extends Parent{
 	                fondCarre.setWidth(47);
 	                fondCarre.setStroke(Color.WHITE);
 	                fondCarre.setStrokeWidth(2);
-	                System.out.println(getColonne() + " " + getLigne());
-	                if(getPlayerSide()==true) {
-	                	System.out.println("J'appartiens au joueur");
-	                }
-	                else {
-	                	System.out.println("J'appartiens a l'adversaire");
-	                }
 	            }
 	        });
 	        
@@ -109,18 +102,6 @@ public class Carre extends Parent{
 	        });
 			break;
         }
-        
-        this.setOnMousePressed(new EventHandler<MouseEvent>(){
-            public void handle(MouseEvent me){                  
-                System.out.println(getColonne() + " " + getLigne());
-                if(getPlayerSide()==true) {
-                	System.out.println("J'appartiens au joueur");
-                }
-                else {
-                	System.out.println("J'appartiens a l'adversaire");
-                }
-            }
-        });
     }
     
     public void majCarre(Content contenu)
@@ -167,6 +148,7 @@ public class Carre extends Parent{
     	return playerSide;
     }
 
+    
 }   
     
 

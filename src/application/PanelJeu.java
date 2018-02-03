@@ -32,6 +32,9 @@ public class PanelJeu extends Parent {
             {
                 Carre bouton = new Carre(playerSide, Content.sea, i, j);//on le compose de carrés
                 ligne.add(bouton);
+//                GridPane.setRowIndex(bouton, j);
+//                GridPane.setColumnIndex(bouton, i);
+//                grid.getChildren().add(bouton);
                 grid.add(bouton, i, j);
             }
             liste.add(ligne);
