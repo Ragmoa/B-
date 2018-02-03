@@ -8,16 +8,11 @@ public class Joueur {
 	private String pseudo;
 	private boolean ia;
 	private Boat[] bateaux;
-	
+
 	public Joueur(String pseudo, boolean ia) {
 		this.pseudo = pseudo;
 		this.ia = ia;
 		int pos[] = {0,0};
-//		bateaux[0] = new Boat(5, 2, true, pos);
-//		bateaux[1] = new Boat(4, 2, true, pos);
-//		bateaux[2] = new Boat(3, 2, true, pos);
-//		bateaux[3] = new Boat(3, 4, true, pos);
-//		bateaux[4] = new Boat(2, 5, true, pos);		
 	}
 
 	public String getPseudo() {
@@ -27,7 +22,6 @@ public class Joueur {
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
-	
 	public boolean isIa() {
 		return ia;
 	}
@@ -39,7 +33,6 @@ public class Joueur {
 	public String toString() {
 		return pseudo;
 	}
-	
 	//EVITE QUE LES DEUX JOUEURS AIENT LE MEME PSEUDO
 	public void verifierPseudo(Joueur joueur) {
 		if(pseudo.length() == 0)
@@ -53,6 +46,7 @@ public class Joueur {
 				pseudo = "Copieur";
 		}
 	}
+<<<<<<< HEAD
 	
 	
 //	 public void placer_bateau(int x , int y){
