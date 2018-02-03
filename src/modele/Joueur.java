@@ -1,3 +1,4 @@
+<<<<<<< current
 package modele;
 
 import application.Boat;
@@ -94,7 +95,7 @@ public class Joueur {
 			public boolean check_collision (Boat b, int x, int y){
 
 			}
-	    public Boat select_bateau(int x, int y) {//TODO: Déplacer dans Joueur_humain
+	    public Boat select_bateau(int x, int y) {//TODO: Dï¿½placer dans Joueur_humain
 	        int i=0, j=0;
 	          for (i=0;i<5;i++){
 	            for (j=0;j<this.bateaux[i].get_taille();j++){
@@ -108,8 +109,11 @@ public class Joueur {
 
 	      public void bouger(Boat b, int x, int y){
 	        int[] npos=new int[2];
-	        npos={x,y};
+	        npos[0]=x;
+					npos[1]=y;
 	        b.set_position(npos);
 	        return ;
 	      }
 }
+=======
+>>>>>>> before discard
