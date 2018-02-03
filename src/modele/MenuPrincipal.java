@@ -11,9 +11,7 @@ public class MenuPrincipal {
 	
 	public MenuPrincipal() {
 		j1 = new Joueur("Joueur 1", false);
-		j1.setCouleur(Color.WHITE);
 		j2 = new Joueur("Joueur 2", false);
-		j2.setCouleur(Color.BLACK);
 	}
 
 	public Joueur getJ1() {

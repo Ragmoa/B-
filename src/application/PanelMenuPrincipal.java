@@ -4,7 +4,6 @@ import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import modele.MenuPrincipal;
 
@@ -24,7 +23,6 @@ public class PanelMenuPrincipal {
 	private Label titre, j1, j2, vs, mode;
 	private VBox joueur1, joueur2;
 	private TextField pseudoJ1, pseudoJ2;
-	private ColorPicker colorJ1, colorJ2;
 	private final Button jcj = new Button(), jce = new Button();
 	private Button jouer;
 	
@@ -63,15 +61,7 @@ public class PanelMenuPrincipal {
 			menu.getJ1().setPseudo(pseudoJ1.getText());
 			menu.getJ1().verifierPseudo(menu.getJ2());
 		});
-		colorJ1 = new ColorPicker(Color.web("#FFFFFF"));
-		colorJ1.setPadding(new Insets(4));
-		colorJ1.setPrefWidth(150);
-		colorJ1.setId("colorJ1");
-		colorJ1.setOnAction((event) -> {
-			menu.getJ1().setCouleur(colorJ1.getValue());
-			colorJ1.setStyle("-fx-color: #"+String.format("%02X%02X%02X", (int)(colorJ1.getValue().getRed()*255), (int)(colorJ1.getValue().getGreen()*255), (int)(colorJ1.getValue().getBlue()*255)));
-		});
-		joueur1.getChildren().addAll(pseudoJ1, colorJ1);
+		joueur1.getChildren().addAll(pseudoJ1);
 		joueur1.setAlignment(Pos.CENTER);
 		gridMenu.add(joueur1, 1, 1);
 			//COLONNE 2 : "VS"
@@ -90,15 +80,7 @@ public class PanelMenuPrincipal {
 			menu.getJ2().setPseudo(pseudoJ2.getText());
 			menu.getJ2().verifierPseudo(menu.getJ1());
 		});
-		colorJ2 = new ColorPicker(Color.web("#000000"));
-		colorJ2.setPadding(new Insets(4));
-		colorJ2.setPrefWidth(150);
-		colorJ2.setId("colorJ2");
-		colorJ2.setOnAction((event) -> {
-			menu.getJ2().setCouleur(colorJ2.getValue());
-			colorJ2.setStyle("-fx-color: #"+String.format("%02X%02X%02X", (int)(colorJ2.getValue().getRed()*255), (int)(colorJ2.getValue().getGreen()*255), (int)(colorJ2.getValue().getBlue()*255)));
-		});
-		joueur2.getChildren().addAll(pseudoJ2, colorJ2);
+		joueur2.getChildren().addAll(pseudoJ2);
 		joueur2.setAlignment(Pos.CENTER_LEFT);
 		gridMenu.add(joueur2, 3, 1);
 			//COLONNE 4 : "J2"
@@ -144,9 +126,6 @@ public class PanelMenuPrincipal {
 			mainOthello.jouer(primaryStage);
 		});
 		gridMenu.add(jouer, 2, 7);
-
-		colorJ1.setStyle("-fx-color: #FFFFFF");
-		colorJ2.setStyle("-fx-color: #000000");
 		
 		primaryStage.setScene(scene);
 	}

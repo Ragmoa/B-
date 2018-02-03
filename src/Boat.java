@@ -1,10 +1,10 @@
 public class Boat {
 
-    private int[] position; //Repr√©sente la case la plus haut, en vertical ou le plus a gauche en Horizontal.
+    private int[] position; //ReprÈsente la case la plus haut, en vertical ou le plus a gauche en Horizontal.
     private boolean horizontal;// Le bateau est-il horizontal ou vertical.
     private boolean[] cases_touchees;//pour chaque case du bateau, est-elle touch√©e ou non.
     private int taille; // la taille du bateau.
-    private int portee; // La port√©e de tir du bateau.
+    private int portee; // La portÈe de tir du bateau.
 
     public Boat(int taille, int portee,boolean horizontal, int[] pos ){
       this.taille=taille;

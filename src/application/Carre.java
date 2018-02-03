@@ -7,12 +7,10 @@ package application;
 
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import modele.Case;
+import modele.Content;
 
 /**
  *
@@ -21,75 +19,152 @@ import modele.Case;
 
 //Correspond à un carré dans le quadrillage 10*10
 //Sert à l'affichage et gestion des clics
-//Correspond à une Case du coté des données 
 
 public class Carre extends Parent{
-    private Case caseO;
+    private Boolean playerSide; //1=appartient au plateau avec les bateaux du joueur, 0=appartient au plateau avec les tirs vers l'adversaire
+    int ligne;
+    int colonne;    
     
-    public Carre(Case azerty){
+    public Carre(Boolean player, Content contenu, int ligne, int colonne){
+    	this.playerSide=player;
+    	this.ligne=ligne;
+    	this.colonne=colonne;
+    	
         Rectangle fondCarre = new Rectangle(0,0,50,50);
-        Circle pion = new Circle(25,25,15,Color.WHITE);
-        pion.setFill(Color.WHITE);
-        pion.setStroke(Color.WHITE);
-        
-        //chaque carré est lié à une case du plateau
-        caseO=azerty;
-
         fondCarre.setFill(Color.WHITE);
         fondCarre.setStroke(Color.BLACK);
         getChildren().add(fondCarre);
-        getChildren().add(pion);
         
         //on définit son comportement par rapport a la souris
+        switch(contenu) {
+		case boat:
+			fondCarre.setFill(Color.WHITE);
+			break;
+		case boat_hit:
+			fondCarre.setFill(Color.BLACK);
+			break;
+		case boat_range:
+			fondCarre.setFill(Color.RED);
+			break;
+		case hit:
+			break;
+		case miss:
+			break;
+		case sea:
+			fondCarre.setFill(Color.LIGHTBLUE);
+			this.setOnMouseEntered(new EventHandler<MouseEvent>(){
+	            public void handle(MouseEvent me){
+	                fondCarre.setFill(Color.GREY);
+	                fondCarre.setStroke(Color.BLACK);
+	            }
+	        });
 
-        this.setOnMouseEntered(new EventHandler<MouseEvent>(){
-            public void handle(MouseEvent me){
-                fondCarre.setFill(Color.GREY);
-                fondCarre.setStroke(Color.BLACK);
-                pion.setFill(Color.GREY);
-                pion.setStroke(Color.GREY);
-            }
-        });
+	        this.setOnMouseExited(new EventHandler<MouseEvent>(){
+	            public void handle(MouseEvent me){
+	                fondCarre.setFill(Color.LIGHTBLUE);
+	                fondCarre.setStroke(Color.BLACK);
+	            }
+	        }); 
+			break;
+		default:
+			this.setOnMouseEntered(new EventHandler<MouseEvent>(){
+	            public void handle(MouseEvent me){
+	                fondCarre.setFill(Color.GREY);
+	                fondCarre.setStroke(Color.BLACK);
+	            }
+	        });
 
-        this.setOnMouseExited(new EventHandler<MouseEvent>(){
-            public void handle(MouseEvent me){
-                fondCarre.setFill(Color.WHITE);
-                fondCarre.setStroke(Color.BLACK);
-                pion.setFill(Color.WHITE);
-                pion.setStroke(Color.WHITE);
-            }
-        });   
+	        this.setOnMouseExited(new EventHandler<MouseEvent>(){
+	            public void handle(MouseEvent me){
+	                fondCarre.setFill(Color.WHITE);
+	                fondCarre.setStroke(Color.BLACK);
+	            }
+	        });
+	        
+	        this.setOnMousePressed(new EventHandler<MouseEvent>(){
+	            public void handle(MouseEvent me){                  
+	                fondCarre.setFill(Color.GREY);
+	                fondCarre.setHeight(47);
+	                fondCarre.setWidth(47);
+	                fondCarre.setStroke(Color.WHITE);
+	                fondCarre.setStrokeWidth(2);
+	                System.out.println(getColonne() + " " + getLigne());
+	                if(getPlayerSide()==true) {
+	                	System.out.println("J'appartiens au joueur");
+	                }
+	                else {
+	                	System.out.println("J'appartiens a l'adversaire");
+	                }
+	            }
+	        });
+	        
+	        this.setOnMouseReleased(new EventHandler<MouseEvent>(){
+	            public void handle(MouseEvent me){
+	                fondCarre.setFill(Color.WHITE);
+	                fondCarre.setStroke(Color.BLACK);
+	                fondCarre.setHeight(50);
+	                fondCarre.setWidth(50); 
+	                fondCarre.setStrokeWidth(1);
+	            }
+	        });
+			break;
+        }
         
         this.setOnMousePressed(new EventHandler<MouseEvent>(){
             public void handle(MouseEvent me){                  
-                fondCarre.setFill(Color.GREY);
-                fondCarre.setHeight(47);
-                fondCarre.setWidth(47);
-                fondCarre.setStroke(Color.WHITE);
-                fondCarre.setStrokeWidth(2);
-                pion.setFill(Color.GREY);
-                pion.setStroke(Color.GREY);
-                System.out.println(caseO.getTypeC());
-                System.out.println(caseO.getColonne() + " " + caseO.getLigne());
+                System.out.println(getColonne() + " " + getLigne());
+                if(getPlayerSide()==true) {
+                	System.out.println("J'appartiens au joueur");
+                }
+                else {
+                	System.out.println("J'appartiens a l'adversaire");
+                }
             }
         });
-        
-        this.setOnMouseReleased(new EventHandler<MouseEvent>(){
-            public void handle(MouseEvent me){
-                fondCarre.setFill(Color.WHITE);
-                fondCarre.setStroke(Color.BLACK);
-                fondCarre.setHeight(50);
-                fondCarre.setWidth(50); 
-                fondCarre.setStrokeWidth(1);
-                pion.setFill(Color.WHITE);
-                pion.setStroke(Color.WHITE);
-            }
-        });
-            
     }
     
-    public Case getCase(){
-        return caseO;
+    public void majCarre(Content contenu)
+    {
+//    	//on change l'affichage et le comportement en fonction du (nouveau) contenu de sa case
+//        Rectangle fondCarre = new Rectangle(0,0,84,84);
+//        fondCarre.setFill(Color.WHITE);
+//        fondCarre.setStroke(Color.BLACK);
+//        if(caseO.isaJoueur()==true)
+//        {
+//            Circle pion = new Circle();
+//            pion.setCenterX(42);
+//            pion.setCenterY(42);
+//            pion.setRadius(30);
+//            
+//            pion.setFill(caseO.getJoueur().getCouleur());
+//            pion.setStroke(Color.BLACK);
+//            pion.setEffect(new DropShadow(10, Color.BLACK));
+//      
+//            this.setOnMouseEntered(new EventHandler<MouseEvent>(){
+//                public void handle(MouseEvent me){
+//                    fondCarre.setFill(Color.WHITE);
+//                    fondCarre.setStroke(Color.BLACK);
+//
+//                }
+//            });
+//            //on enlève les anciens fonds et pions et on ajoute les nouveaux
+//            this.getChildren().remove(1);
+//            this.getChildren().remove(0);
+//            this.getChildren().add(fondCarre);          
+//            this.getChildren().add(pion);   
+//        }
+    }
+    
+    public int getColonne() {
+		return colonne;
+	}
+    
+	public int getLigne() {
+		return ligne;
+	}
+    
+    public Boolean getPlayerSide() {
+    	return playerSide;
     }
 
 }   

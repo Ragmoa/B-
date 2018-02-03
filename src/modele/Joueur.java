@@ -5,7 +5,6 @@ import javafx.scene.paint.Color;
 public class Joueur {
 
 	private String pseudo;
-	private Color couleur;
 	private boolean ia;
 	
 	public Joueur(String pseudo, boolean ia) {
@@ -27,14 +26,6 @@ public class Joueur {
 
 	public void setIa(boolean ia) {
 		this.ia = ia;
-	}
-
-	public Color getCouleur() {
-		return couleur;
-	}
-
-	public void setCouleur(Color couleur) {
-		this.couleur = couleur;
 	}
 
 	public String toString() {
