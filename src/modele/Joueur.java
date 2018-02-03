@@ -1,4 +1,3 @@
-<<<<<<< current
 package modele;
 
 import application.Boat;
@@ -115,5 +114,3 @@ public class Joueur {
 	        return ;
 	      }
 }
-=======
->>>>>>> before discard
