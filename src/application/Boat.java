@@ -57,5 +57,51 @@ public class Boat {
       }
       return cases;
     }
+    public int[][] cases_portee(){
+      int[][] cases=new int[((2*portee)+1)*taille][2];
+      int i=0, j=0;
+      for (i=0;i<(2*portee)+1;i++){
+        if (this.horizontal){ // BATEAEU HORIZONTAL
+          if(this.position[1]-portee+i>0 && this.position[1]-portee+i<10){// CASES VALIDES
+            for (j=0;j<taille;j++){
+              cases[i*taille+j][0]=this.position[0]+j;
+              cases[i*taille+j][1]=this.position[1]-portee+i;
+            }
+          }else{// CASES NON-VALIDES
+            for (j=0;j<taille;j++){
+              cases[i*taille+j]=null;
+            }
+          }
+        }else{// BATEAU VERTICAL
+          if (this.position[0]-portee+i>0 && this.position[0]-portee+i<10){//CASES VALIDES
+            for (j=0;j<taille;j++){
+              cases[i*taille+j][0]=this.position[0]-portee+i;
+              cases[i*taille+j][1]=this.position[1]+j;
+            }
+          } else {
+            for (j=0;j<taille;j++){
+              cases[i*taille+j]=null;
+            }
+          }
+        }
+      }
+      return cases;
+    }
+
+    public boolean doit_couler(){
+      int dmg=0,i=0;
+      for (i=0;i<taille;i++){
+        if (this.cases_touchees[i]){
+          dmg++;
+        }
+      }
+      if (dmg==this.taille || dmg==3){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+
 
 }
