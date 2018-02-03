@@ -8,7 +8,7 @@ public class Joueur {
 	private String pseudo;
 	private boolean ia;
 	private Boat[] bateaux;
-	
+
 	public Joueur(String pseudo, boolean ia) {
 		this.pseudo = pseudo;
 		this.ia = ia;
@@ -17,7 +17,7 @@ public class Joueur {
 		bateaux[1] = new Boat(4, 2, true, pos);
 		bateaux[2] = new Boat(3, 2, true, pos);
 		bateaux[3] = new Boat(3, 4, true, pos);
-		bateaux[4] = new Boat(2, 5, true, pos);		
+		bateaux[4] = new Boat(2, 5, true, pos);
 	}
 
 	public String getPseudo() {
@@ -27,7 +27,7 @@ public class Joueur {
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
-	
+
 	public boolean isIa() {
 		return ia;
 	}
@@ -39,7 +39,7 @@ public class Joueur {
 	public String toString() {
 		return pseudo;
 	}
-	
+
 	//EVITE QUE LES DEUX JOUEURS AIENT LE MEME PSEUDO
 	public void verifierPseudo(Joueur joueur) {
 		if(pseudo.length() == 0)
@@ -53,40 +53,50 @@ public class Joueur {
 				pseudo = "Copieur";
 		}
 	}
-	
-	
+
+
 	 public void placer_bateau(int x , int y){
 
 		 for(int i = 0; i < 5 ; i++);
 	    }
-	    
+
 	    public void update_boat(Boat bateau, PlateauJeu plate) {
 	    	int posi[][] = bateau.cases_ocupees();
 	    	for(int i = 0 ;  i < posi[0].length ; i++) {
 	    		for(int j = 0 ; j < posi[1].length ; j++) {
 	    				plate.getCase(posi[i][0], posi[j][1]).setTypeC(Content.boat);
-	    		}  		
+	    		}
 	    	}
 	    }
-	    
+
 	    public void tirer(PlateauJeu plate, int i, int j) {
 	    	if(plate.getCase(i,j).getTypeC()==Content.boat) {
 	    		plate.getCase(i, j).setTypeC(Content.boat_hit);
-	    		System.out.println("touché");
+	    		System.out.println("touchï¿½");
 	    	}
 	    	else if(plate.getCase(i, j).getTypeC()==Content.boat_hit) {
-	    		System.out.println("bateau déjà abimé");	    			    		
+	    		System.out.println("bateau dï¿½jï¿½ abimï¿½");
 	    	}
 	    	else
-	    		System.out.println("raté");
+	    		System.out.println("ratï¿½");
 	    }
-	    
-	    public void select_bateau(PlateauJeu plate, int i, int j) {
-	    	if(plate.getCase(i,j).getTypeC()==Content.boat) {
-	    		
-	    	}
-	    }
-	    public void bouger(PlateauJeu plate, int i, int j){
-	    	
+
+      public Boat select_bateau(int x, int y) {//TODO: DÃ©placer dans Joueur_humain
+        int i=0, j=0;
+          for (i=0;i<5;i++){
+            for (j=0;j<this.bateaux[i].taille;j++){
+              if (x==this.bateaux[i].cases_ocupees()[j][0] && y==this.bateaux[i].cases_ocupees()[j][1]){
+                return this.bateaux[i];
+              }
+            }
+          }
+          return null;
+      }
+
+	    public void bouger(Boat b, int x, int y){
+        int[] npos=new int[2];
+        npos={x,y};
+        b.set_position(npos);
+        return ;
 	    }
 }
