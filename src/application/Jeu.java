@@ -2,6 +2,8 @@ package application;
 
 
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -58,13 +60,20 @@ public class Jeu{
         border.setRight(panelAdversaire1.addGridPane(false));//plateau a droite
         groupJeu.getChildren().add(border);
         
-        panelJoueur1.getGrid().setOnMouseClicked((event)-> {
-        	
+        panelJoueur1.getGrid().setOnMouseClicked((event)-> {        	
+        	for( Node node: panelJoueur1.getGrid().getChildren()) {
+                if( node instanceof Parent) {
+                    if( node.getBoundsInParent().contains(event.getSceneX(),  event.getSceneY())) {
+                        //System.out.println( "Carre " + GridPane.getColumnIndex( node) + "/" + GridPane.getRowIndex( node));
+                        clic(GridPane.getColumnIndex( node), GridPane.getRowIndex( node), true);
+                    }
+                }
+            }
         });
         
 	}
 	
 	public void clic(int colonne, int ligne, boolean playerSide) {
-		
+		System.out.println("case " + colonne + " " + ligne);
 	}
 }
