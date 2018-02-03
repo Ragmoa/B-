@@ -18,7 +18,7 @@ Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'
       - ~~*Doit être coulé*~~
 
 - [ ] Joueur (Abstraite)
-    - Liste de Bateaux
+    - ~~Liste de Bateaux~~
     - Tableau de cases touchées/ratées
     - Peut se déplacer a ce tour-ci
     - Dernière case jouée par l'adversaire.
