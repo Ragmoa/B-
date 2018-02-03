@@ -1,0 +1,73 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+#pane {
+	-fx-background-color: #303030;	
+}
+#titre, #victoire {
+	-fx-text-fill: #FFFFFF;
+	-fx-font-size: 60px;
+	-fx-font-weight: bold;
+	-fx-text-alignment: center;
+}
+#j1, #j2, #jeu {
+	-fx-text-fill: #FFFFFF;
+	-fx-font-size: 50px;
+	-fx-font-weight: bold;
+}
+#pseudoJ1, #pseudoJ2 {
+	-fx-font-size: 20px;
+	-fx-font-weight: bold;
+}
+#colorJ1, #colorJ2 {
+	-fx-font-size: 12px;
+	-fx-font-weight: bold;
+}
+#colorJ1 .color-picker-label, #colorJ2 .color-picker-label {
+	visibility: false;
+}
+#vs {
+	-fx-text-fill: #FFFFFF;
+	-fx-font-size: 90px;
+	-fx-font-weight: bold;
+}
+#othello, #hexxagon {
+	-fx-font-size: 15px;
+	-fx-font-weight: bold;
+}
+#mode, #dernieresParties {
+	-fx-text-fill: #FFFFFF;
+	-fx-font-size: 30px;
+	-fx-font-weight: bold;
+}
+#jcj, #jce {
+	-fx-font-size: 13px;
+	-fx-font-weight: bold;
+}
+#taille, #inaccessible {
+	-fx-text-fill: #FFFFFF;
+	-fx-font-size: 20px;
+	-fx-font-weight: bold;
+}
+#jouer, #menuPrincipal {
+	-fx-font-size: 30px;
+	-fx-font-weight: bold;
+}
+#boxTaille, #boxInaccessible {
+	-fx-font-size: 15px;
+	-fx-font-weight: bold;
+}
+#gagnant {
+	-fx-font-size: 60px;
+	-fx-font-weight: bold;
+	-fx-effect: dropshadow(three-pass-box, #FFFFFF, 3, 0.8, 0, 0);
+}
+#histoJ1, #histoJ2, #histoScore1, #histoScore2, #tiret {
+	-fx-font-size: 30px;
+	-fx-effect: dropshadow(three-pass-box, #FFFFFF, 3, 0.8, 0, 0);
+}
+#histoScore1, #histoScore2, #tiret {
+	-fx-text-fill: #FFFFFF;
+	-fx-effect: dropshadow(three-pass-box, #16BEEB, 10, 0.5, 0, 0);
+}
