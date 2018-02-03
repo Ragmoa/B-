@@ -101,7 +101,7 @@ public class Joueur {
 			public check_collision (Boat b, int x, int y){
 
 			}
-	    public Boat select_bateau(int x, int y) {//TODO: Dï¿½placer dans Joueur_humain
+	    public Boat select_bateau(int x, int y) {//TODO: Déplacer dans Joueur_humain
 	        int i=0, j=0;
 	          for (i=0;i<5;i++){
 	            for (j=0;j<this.bateaux[i].taille;j++){
