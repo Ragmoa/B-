@@ -92,9 +92,29 @@ public class Joueur {
 			}
 
 			public boolean check_collision (Boat b, int x, int y){
+				int ox=b.get_position()[0];
+				int oy=b.get_position()[1];
+				int i=0, j=0,k=0;
+				bouger(b,x,y);
+				for (i=0;i<5;i++){
+					if (this.bateaux[i]!=null && this.bateaux[i].get_taille()!=b.get_taille() && this.bateaux[i].get_portee()!=b.get_portee()){
+						for (j=0;j<this.bateaux[i].get_taille();j++){
+							for (k=0,k<b.get_taille();k++){
+								if (b.cases_ocupees()[k][0]==this.bateaux[i].cases_ocupees()[j][0] && b.cases_ocupees()[k][1]==this.bateaux[i].cases_ocupees()[j][1]){
+									bouger(b,ox,oy);
+									return true;
+								}
+							}
+						}
+					}
+				}
+				bouger(b,ox,oy);
+				return false;
+			}
+
 
 			}
-	    public Boat select_bateau(int x, int y) {//TODO: Dï¿½placer dans Joueur_humain
+	    public Boat select_bateau(int x, int y) {//TODO: Déplacer dans Joueur_humain
 	        int i=0, j=0;
 	          for (i=0;i<5;i++){
 	            for (j=0;j<this.bateaux[i].get_taille();j++){
