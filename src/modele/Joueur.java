@@ -267,9 +267,6 @@ public void setCases_portee(int[][]cases_portee) {
          	}
          	int k=0;      	
          	int[][]cases = new int[taille][2];
-         	System.out.println("taille");
-         	//System.out.println(bateaux[0].cases_portee()[0][0]);
-         	//System.out.println(bateaux[0].cases_portee()[0][1]);
          	
          	for(int i=0;i<5;i++) {
          		for(int j=0;j<bateaux[i].cases_portee().length;j++) {

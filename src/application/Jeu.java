@@ -140,27 +140,36 @@ public class Jeu{
 		case 1 : //tir
 			if(playerSide==false) {
 				int reponse;
-				if(j_actuel.getPseudo().equals(j1.getPseudo())) {
-					reponse=j2.tir_ennemi(colonne, ligne);
-					System.out.println("tir sur" + j2.getPseudo() + " : " +reponse);
+				boolean valid=false;
+				for(int i=0;i<j_actuel.get_player_range().length;i++) { 
+					if(colonne==j_actuel.get_player_range()[i][0] && ligne==j_actuel.get_player_range()[i][1]) {
+						valid=true;						 
+					}
+			    }
+				if(valid) {
+					if(j_actuel.getPseudo().equals(j1.getPseudo())) {
+						reponse=j2.tir_ennemi(colonne, ligne);
+						System.out.println("tir sur" + j2.getPseudo() + " : " +reponse);
+					}
+					else {
+						reponse=j1.tir_ennemi(colonne, ligne);
+						System.out.println("tir sur" + j1.getPseudo() + " : " +reponse);
+					}
+					//gestion des touch�s/rat�s
+					//TODO verifier la range
+					if(reponse==0) {
+						panel.majPanel(colonne, ligne, Content.miss);
+						j_actuel.set_status(colonne, ligne, -1);
+						this.statut=2;
+					}
+					else {
+						panel.majPanel(colonne, ligne, Content.hit);
+						j_actuel.set_status(colonne, ligne, 1);
+						this.statut=1;
+					}
+					this.etapeJeu=2;
 				}
-				else {
-					reponse=j1.tir_ennemi(colonne, ligne);
-					System.out.println("tir sur" + j1.getPseudo() + " : " +reponse);
-				}
-				//gestion des touch�s/rat�s
-				//TODO verifier la range
-				if(reponse==0) {
-					panel.majPanel(colonne, ligne, Content.miss);
-					j_actuel.set_status(colonne, ligne, -1);
-					this.statut=2;
-				}
-				else {
-					panel.majPanel(colonne, ligne, Content.hit);
-					j_actuel.set_status(colonne, ligne, 1);
-					this.statut=1;
-				}
-				this.etapeJeu=2;					
+				else this.etapeJeu=1;			              
 			}
 			break;
 		case 2 : //attente apres tir
