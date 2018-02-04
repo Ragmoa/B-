@@ -83,7 +83,6 @@ public class Jeu{
         	for( Node node: panelJoueur1.getGrid().getChildren()) {
                 if( node instanceof Parent) {
                     if( node.getBoundsInParent().contains(event.getSceneX(),  event.getSceneY())) {
-                        //System.out.println( "Carre " + GridPane.getColumnIndex( node) + "/" + GridPane.getRowIndex( node));
                         ligneTemp=GridPane.getRowIndex( node);
                         colonneTemp=GridPane.getColumnIndex( node);
                     }
@@ -92,11 +91,23 @@ public class Jeu{
         	if(ligneTemp!=-1 && colonneTemp!=-1) {
         		clic(panelJoueur1, colonneTemp, ligneTemp, true); //true si panel de gauche, avec bateaux
         	}
-        	if (event.getButton() == MouseButton.SECONDARY) {
-               panelJoueur1.resetPanel();
-            }
         });
         
+        panelAdversaire1.getGrid().setOnMouseClicked((event)-> { 
+        	int ligneTemp=-1, colonneTemp=-1;
+        	for( Node node1: panelAdversaire1.getGrid().getChildren()) {
+                if( node1 instanceof Parent) {
+                	if( node1.getBoundsInParent().contains(event.getSceneX()-500-15,  event.getSceneY())) // AJUSTEMENT EN PIXELS ICI
+                    {	
+                        ligneTemp=GridPane.getRowIndex( node1);
+                        colonneTemp=GridPane.getColumnIndex( node1);
+                    }
+                }
+            }
+        	if(ligneTemp!=-1 && colonneTemp!=-1) {
+        		clic(panelAdversaire1, colonneTemp, ligneTemp, false); //false si panel de droite, celui de l'adversaire
+        	}
+        });
 	}
 	
 	public void clic(PanelJeu panel, int colonne, int ligne, boolean playerSide) {
