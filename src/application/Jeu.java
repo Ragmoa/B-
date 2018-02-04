@@ -89,7 +89,7 @@ public class Jeu{
                 }
             }
         	if(ligneTemp!=-1 && colonneTemp!=-1) {
-        		clic(panelJoueur1, colonneTemp, ligneTemp, true); //true si panel de gauche, avec bateaux
+        		clic(panelJoueur1, colonneTemp, ligneTemp, true, panelAdversaire1); //true si panel de gauche, avec bateaux
         		majHbox();
         	}
         });
@@ -106,20 +106,27 @@ public class Jeu{
                 }
             }
         	if(ligneTemp!=-1 && colonneTemp!=-1) {
-        		clic(panelAdversaire1, colonneTemp, ligneTemp, false); //false si panel de droite, celui de l'adversaire
+        		clic(panelAdversaire1, colonneTemp, ligneTemp, false, panelJoueur1); //false si panel de droite, celui de l'adversaire
         		majHbox();
         	}
         });
 	}
 	
-	public void clic(PanelJeu panel, int colonne, int ligne, boolean playerSide) {
+	public void clic(PanelJeu panel, int colonne, int ligne, boolean playerSide, PanelJeu autrePanel) {
 		System.out.println("case " + colonne + " " + ligne);		
 		switch(this.getEtapeJeu()) {
 		case 0 : //placement bateau début partie
 			if(playerSide==true){
 				panel.majPanel(colonne, ligne, Content.boat_range);
-				j1.setBateauplace(j1.placer_bateau(colonne, ligne, j1.getBateauplace(), true));
-				if(j1.getBateauplace()==5)this.etapeJeu=1;
+				j_actuel.setBateauplace(j_actuel.placer_bateau(colonne, ligne, j_actuel.getBateauplace(), true));
+				if(j_actuel.getBateauplace()==5) {
+					panel.resetPanel();
+					autrePanel.resetPanel();		
+					if(j_actuel.getPseudo().equals(j2.getPseudo())) {
+						this.etapeJeu=1;
+					}	
+					changeTour();
+				}
 			}
 			break;
 		case 1 : //tir
