@@ -181,9 +181,9 @@ public class Jeu{
 				for(int i=0; i<5; i++) {
 					caseTouchee=j_actuel.cases_touchees(i);
 					if(caseTouchee!=null && caseTouchee[0]!=null) {
-				        autrePanel.majPanel(caseTouchee[0][0], j_actuel.get_player_boat()[0][1], Content.boat_hit);	
+				        autrePanel.majPanel(caseTouchee[0][0], caseTouchee[0][1], Content.boat_hit);	
 						if(caseTouchee[1]!=null) {
-					        autrePanel.majPanel(caseTouchee[1][0], j_actuel.get_player_boat()[1][1], Content.boat_hit);	
+					        autrePanel.majPanel(caseTouchee[1][0], caseTouchee[1][1], Content.boat_hit);	
 						}
 					}
 					caseTouchee=null;
