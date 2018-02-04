@@ -158,11 +158,13 @@ public class Jeu{
 			}
 			break;
 		case 2 : //attente apres tir
-			this.etapeJeu=3;
-			this.statut=0;	
-			panel.resetPanel();
-			autrePanel.resetPanel();
-			changeTour();
+			if(playerSide==false) {
+				this.etapeJeu=3;
+				this.statut=0;	
+				panel.resetPanel();
+				autrePanel.resetPanel();
+				changeTour();
+			}
 			break;
 		case 3 : //attente avant de changer de joueur
 			if(playerSide==false) {
@@ -235,7 +237,7 @@ public class Jeu{
 			texteEtapeJeu.setText(" | Choisissez votre cible");
 			break;
 		case 2 : //attente apres tir
-			texteEtapeJeu.setText(" | Cliquez sur une case pour finir votre tour");
+			texteEtapeJeu.setText(" | Cliquez sur une case à droite pour finir le tour");
 			break;
 		case 3 : //attente avant de changer de joueur
 			texteEtapeJeu.setText(" | Cliquez sur une case à droite pour commencer");
