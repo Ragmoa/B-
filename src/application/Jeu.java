@@ -131,7 +131,7 @@ public class Jeu{
 					panel.resetPanel();
 					autrePanel.resetPanel();		
 					if(j_actuel.getPseudo().equals(j2.getPseudo())) {
-						this.etapeJeu=1;
+						this.etapeJeu=3;
 					}	
 					changeTour();
 				}
@@ -175,8 +175,19 @@ public class Jeu{
 		case 3 : //attente avant de changer de joueur
 			if(playerSide==false) {
 				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
-			        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat); 
+			        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
 		        }
+				int[][] caseTouchee;
+				for(int i=0; i<5; i++) {
+					caseTouchee=j_actuel.cases_touchees(i);
+					if(caseTouchee!=null && caseTouchee[0]!=null) {
+				        autrePanel.majPanel(caseTouchee[0][0], j_actuel.get_player_boat()[0][1], Content.boat_hit);	
+						if(caseTouchee[1]!=null) {
+					        autrePanel.majPanel(caseTouchee[1][0], j_actuel.get_player_boat()[1][1], Content.boat_hit);	
+						}
+					}
+					caseTouchee=null;
+				}
 				//On replace les hit/miss pour la suite
 				int tableauDroite[][]=j_actuel.get_status();
 				for(int i=0; i<10; i++) {
