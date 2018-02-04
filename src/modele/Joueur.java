@@ -9,17 +9,18 @@ public class Joueur {
   private Boat[] bateaux; 
   private boolean peut_bouger;
   private int[] coup_adversaire;
-  private Boat[] bateaux;
+  private int bateauplace;
   
  
   public Joueur(String pseudo, boolean ia) { 
     this.pseudo = pseudo; 
     this.ia = ia;
     bateaux = new Boat[5];
-  }
     this.peut_bouger=true;
-  } 
- 
+    this.bateauplace = 0;
+  }
+
+  
   public String getPseudo() { 
     return pseudo; 
   } 
@@ -48,7 +49,14 @@ public class Joueur {
   }
   public Boat[] getBateau() { 
 	    return bateaux; 
-	  } 
+	  }
+  
+  public int getBateauplace() { 
+	    return bateauplace; 
+	  }
+  public void setBateauplace(int bateauplace) {
+	 this.bateauplace = bateauplace;
+}
  
   public String toString() { 
     return pseudo; 
@@ -81,7 +89,8 @@ public class Joueur {
     		   else if(i==2)b=new Boat(3,2,true,pos);
     		   else if(i==3)b=new Boat(3,4,true,pos);
     		   else if(i==4)b=new Boat(2,5,true,pos);
-    		   if(i!=0 && !check_collision(b) && (b.get_taille()+x < 10 && b.is_horizontal()) || (b.get_taille()+y < 10 && !b.is_horizontal() ) ){		  
+    		   if(i!=0 && !check_collision(b) && (b.get_taille()+x < 10 && b.is_horizontal()) || (b.get_taille()+y < 10 && !b.is_horizontal() ) ){
+    			   System.out.println("allo");
     			   if(i==1)bateaux[1]=new Boat(4,2,true,pos);
     			   else if(i==2)bateaux[2]=new Boat(3,2,true,pos);
     			   else if(i==3)bateaux[3]=new Boat(3,4,true,pos);

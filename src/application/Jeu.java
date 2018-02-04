@@ -34,6 +34,7 @@ public class Jeu{
 	private Label texteEtapeJeu = new Label(); ;
 	private Scene sceneMenu;
 	
+	
 	public Jeu(Joueur j1, Joueur j2, Scene sceneMenu)
 	{		
 		this.j1=j1;
@@ -100,13 +101,15 @@ public class Jeu{
 	
 	public void clic(PanelJeu panel, int colonne, int ligne, boolean playerSide) {
 		System.out.println("case " + colonne + " " + ligne);
-		panel.majPanel(colonne, ligne, Content.hit);
-		int i = 0;
-		j1.placer_bateau(colonne, ligne, i, true);		
-		System.out.println(j1.getBateau()[0].cases_ocupees()[0][0] + " " + j1.getBateau()[0].cases_ocupees()[0][1]);
+		panel.majPanel(colonne, ligne, Content.hit);		
 		switch(this.getEtapeJeu()) {
 		case 0 : //placement bateau d�but partie
 			panel.majPanel(colonne, ligne, Content.boat_range);
+			j1.setBateauplace(j1.placer_bateau(colonne, ligne, j1.getBateauplace(), true));
+			if(j1.getBateauplace()==5)this.etapeJeu=1;
+			//System.out.println(j1.getBateau()[0].cases_ocupees()[0][0] + " " + j1.getBateau()[0].cases_ocupees()[0][1]);
+			//System.out.println(j1.getBateauplace());
+			
 			break;
 		case 1 : //tir
 			break;
