@@ -202,22 +202,26 @@ public class Joueur {
         }
         public int[][] get_player_boat(){
      	
-     	int taille=0;
-     	for(int i=0;i<this.getBateauplace();i++)
-     	{    		
-     		taille+=bateaux[i].get_taille();
-     	}
-     	int k=0;
-     	int[][]cases = new int[taille][2];
-     	
-     	for(int i=0;i<this.bateauplace;i++) {
-     		for(int j=0;j<bateaux[i].cases_ocupees().length;j++) {
-     			cases[k][0]=bateaux[i].cases_ocupees()[j][0];
-     			cases[k][1]=bateaux[i].cases_ocupees()[j][1];
-     			k++;
-     		}
-     	}
-     	return cases;
+		 	int taille=0;
+		 	for(int i=0;i<this.getBateauplace();i++)
+		 	{    
+		 		if(bateaux[i]!=null) {
+		 			taille+=bateaux[i].get_taille();
+		 		}	 		
+		 	}
+		 	int k=0;
+		 	int[][]cases = new int[taille][2];
+		 	
+		 	for(int i=0;i<this.bateauplace;i++) {
+		 		if(bateaux[i]!=null) {
+		 			for(int j=0;j<bateaux[i].cases_ocupees().length;j++) {
+			 			cases[k][0]=bateaux[i].cases_ocupees()[j][0];
+			 			cases[k][1]=bateaux[i].cases_ocupees()[j][1];
+			 			k++;
+			 		}
+		 		}
+		 	}
+		 	return cases;
         }
         
         public boolean a_perdu() {

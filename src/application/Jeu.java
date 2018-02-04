@@ -121,11 +121,12 @@ public class Jeu{
 			if(playerSide==true){
 				panel.majPanel(colonne, ligne, Content.boat_range);
 				j_actuel.setBateauplace(j_actuel.placer_bateau(colonne, ligne, j_actuel.getBateauplace(), true));
-				 j_actuel.setCases_joueur(j_actuel.get_player_boat()); 
+				j_actuel.setCases_joueur(j_actuel.get_player_boat()); 
 			       
-			      for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
-			        panel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat); 
-			        } 
+			    for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
+			    	panel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
+			    	
+			    } 
 				if(j_actuel.getBateauplace()==5) {
 					panel.resetPanel();
 					autrePanel.resetPanel();		
@@ -175,7 +176,7 @@ public class Jeu{
 			if(playerSide==false) {
 				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
 			        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat); 
-			        }
+		        }
 				//On replace les hit/miss pour la suite
 				int tableauDroite[][]=j_actuel.get_status();
 				for(int i=0; i<10; i++) {
