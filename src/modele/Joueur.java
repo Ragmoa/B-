@@ -10,6 +10,7 @@ public class Joueur {
   private boolean peut_bouger;
   private int[] coup_adversaire;
   private int bateauplace;
+  private int[][] cases_joueur;
   
  
   public Joueur(String pseudo, boolean ia) { 
@@ -18,6 +19,7 @@ public class Joueur {
     bateaux = new Boat[5];
     this.peut_bouger=true;
     this.bateauplace = 0;
+    cases_joueur = new int[17][2];
   }
 
   
@@ -54,6 +56,12 @@ public class Joueur {
   public int getBateauplace() { 
 	    return bateauplace; 
 	  }
+  public int[][] getCases_joueur() { 
+	    return cases_joueur; 
+	  }
+  public void setCases_joueur(int[][]cases_joueur) { 
+	    this.cases_joueur=cases_joueur; 
+	  }
   public void setBateauplace(int bateauplace) {
 	 this.bateauplace = bateauplace;
 }
@@ -81,7 +89,7 @@ public class Joueur {
 	   
 	   int pos[] = {x,y};
 	   Boat b = new Boat(5,2,true,pos); 
-    		   if(i==0 && (b.get_taille()+x < 10 && b.is_horizontal()) || (b.get_taille()+y < 10 && !b.is_horizontal() )) {	   
+    		   if(i==0 && (b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() )) {	   
     			   bateaux[0]=new Boat(5,2,true,pos);
     			   i++;
     		   }
@@ -89,8 +97,7 @@ public class Joueur {
     		   else if(i==2)b=new Boat(3,2,true,pos);
     		   else if(i==3)b=new Boat(3,4,true,pos);
     		   else if(i==4)b=new Boat(2,5,true,pos);
-    		   if(i!=0 && !check_collision(b) && (b.get_taille()+x < 10 && b.is_horizontal()) || (b.get_taille()+y < 10 && !b.is_horizontal() ) ){
-    			   System.out.println("allo");
+    		   if(i!=0 && !check_collision(b) && (b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ) ){
     			   if(i==1)bateaux[1]=new Boat(4,2,true,pos);
     			   else if(i==2)bateaux[2]=new Boat(3,2,true,pos);
     			   else if(i==3)bateaux[3]=new Boat(3,4,true,pos);
@@ -177,6 +184,25 @@ public class Joueur {
         	}
         	}
         	return 0; // DANS L'EAU!
+        }
+        public int[][] get_player_boat(){
+     	
+     	int taille=0;
+     	for(int i=0;i<this.getBateauplace();i++)
+     	{    		
+     		taille+=bateaux[i].get_taille();
+     	}
+     	int k=0;
+     	int[][]cases = new int[taille][2];
+     	
+     	for(int i=0;i<this.bateauplace;i++) {
+     		for(int j=0;j<bateaux[i].cases_ocupees().length;j++) {
+     			cases[k][0]=bateaux[i].cases_ocupees()[j][0];
+     			cases[k][1]=bateaux[i].cases_ocupees()[j][1];
+     			k++;
+     		}
+     	}
+     	return cases;
         }
         
 } 

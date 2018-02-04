@@ -117,7 +117,14 @@ public class Jeu{
 		case 0 : //placement bateau d�but partie
 			panel.majPanel(colonne, ligne, Content.boat_range);
 			j1.setBateauplace(j1.placer_bateau(colonne, ligne, j1.getBateauplace(), true));
+			j1.setCases_joueur(j1.get_player_boat());
+			
+			for(int i=0;i<j1.get_player_boat().length;i++) {
+				panel.majPanel(j1.get_player_boat()[i][0], j1.get_player_boat()[i][1], Content.boat);
+				System.out.println(j1.get_player_boat()[i][0]+ " "+j1.get_player_boat()[i][1]);
+				}
 			if(j1.getBateauplace()==5)this.etapeJeu=1;
+			
 			//System.out.println(j1.getBateau()[0].cases_ocupees()[0][0] + " " + j1.getBateau()[0].cases_ocupees()[0][1]);
 			//System.out.println(j1.getBateauplace());
 			
