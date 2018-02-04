@@ -34,7 +34,8 @@ public class Jeu{
 	private int etapeJeu;//0=placement de bateau, 1=tir, 2=attente apres tir, 3=deplacement de bateau
 	private Label texteEtapeJeu = new Label(); ;
 	private Scene sceneMenu;
-	
+	private PanelVictoire panelVictoire;
+	private Stage primaryStage;
 	
 	public Jeu(Joueur j1, Joueur j2, Scene sceneMenu)
 	{		
@@ -91,7 +92,12 @@ public class Jeu{
                 }
             }
         	if(ligneTemp!=-1 && colonneTemp!=-1) {
-        		clic(panelJoueur1, colonneTemp, ligneTemp, true, panelAdversaire1); //true si panel de gauche, avec bateaux
+        		if (event.getButton() == MouseButton.SECONDARY) {
+            		clicDroit(panelJoueur1, colonneTemp, ligneTemp, true, panelAdversaire1); //true si panel de gauche, avec bateaux
+                }
+        		else {
+            		clic(panelJoueur1, colonneTemp, ligneTemp, true, panelAdversaire1); //true si panel de gauche, avec bateaux
+        		}
         		majHbox();
         	}
         });
@@ -108,7 +114,12 @@ public class Jeu{
                 }
             }
         	if(ligneTemp!=-1 && colonneTemp!=-1) {
-        		clic(panelAdversaire1, colonneTemp, ligneTemp, false, panelJoueur1); //false si panel de droite, celui de l'adversaire
+        		if (event.getButton() == MouseButton.SECONDARY) {
+            		clicDroit(panelAdversaire1, colonneTemp, ligneTemp, false, panelJoueur1); //false si panel de droite, celui de l'adversaire
+        		}
+        		else {
+            		clic(panelAdversaire1, colonneTemp, ligneTemp, false, panelJoueur1); //false si panel de droite, celui de l'adversaire
+        		}
         		majHbox();
         	}
         });
@@ -159,6 +170,12 @@ public class Jeu{
 					panel.majPanel(colonne, ligne, Content.hit);
 					j_actuel.set_status(colonne, ligne, 1);
 					this.statut=1;
+				}
+				
+				//Condition de victoire
+				if(j1.a_perdu() || j2.a_perdu()) {
+					panelVictoire = new PanelVictoire();
+    				panelVictoire.afficherVictoire(primaryStage, sceneMenu, j_actuel);
 				}
 				this.etapeJeu=2;					
 			}
@@ -214,6 +231,23 @@ public class Jeu{
 		default :
 			break;
 		}	
+	}
+	
+	public void clicDroit(PanelJeu panel, int colonne, int ligne, boolean playerSide, PanelJeu autrePanel) {
+		switch(this.getEtapeJeu()) {
+		case 0:
+			break;
+		case 1 :
+			break;
+		case 2 :
+			break;
+		case 3 :
+			break;
+		case 4 :
+			break;
+		default :
+			break;
+		}
 	}
 	
 	public void changeTour()
