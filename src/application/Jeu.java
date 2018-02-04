@@ -177,6 +177,10 @@ public class Jeu{
 				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
 			        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
 		        }
+				 for(int i=0;i<j_actuel.get_player_range().length;i++) { 
+			          //System.out.println(j_actuel.getCases_portee()[i][0] + " " + j_actuel.getCases_portee()[i][1]); 
+			              panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range);  
+			              } 
 				int[][] caseTouchee;
 				for(int i=0; i<5; i++) {
 					caseTouchee=j_actuel.cases_touchees(i);
