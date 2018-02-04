@@ -9,14 +9,13 @@ public class Joueur {
   private Boat[] bateaux; 
   private boolean peut_bouger;
   private int[] coup_adversaire;
-  private Boat[] bateaux;
+
   
  
   public Joueur(String pseudo, boolean ia) { 
     this.pseudo = pseudo; 
     this.ia = ia;
     bateaux = new Boat[5];
-  }
     this.peut_bouger=true;
   } 
  
