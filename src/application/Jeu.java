@@ -130,7 +130,7 @@ public class Jeu{
 					panel.resetPanel();
 					autrePanel.resetPanel();		
 					if(j_actuel.getPseudo().equals(j2.getPseudo())) {
-						this.etapeJeu=1;
+						this.etapeJeu=3;
 					}	
 					changeTour();
 				}
@@ -176,6 +176,11 @@ public class Jeu{
 				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
 			        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat); 
 			        }
+				for(int i=0;i<j_actuel.get_player_range().length;i++) {
+					//System.out.println(j_actuel.getCases_portee()[i][0] + " " + j_actuel.getCases_portee()[i][1]);
+			        panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range); 
+			        }
+				
 				//On replace les hit/miss pour la suite
 				int tableauDroite[][]=j_actuel.get_status();
 				for(int i=0; i<10; i++) {

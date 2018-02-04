@@ -12,6 +12,7 @@ public class Joueur {
   private int bateauplace;
   private int[][] status; //0=rien, -1=rate, 1=touche
   private int[][] cases_joueur;
+  private int[][] cases_portee;
   
  
   public Joueur(String pseudo, boolean ia) { 
@@ -76,6 +77,13 @@ public class Joueur {
 	  }
   public void setCases_joueur(int[][]cases_joueur) { 
 	    this.cases_joueur=cases_joueur; 
+	  }
+  
+  public int[][] getCases_portee() { 
+	    return cases_portee; 
+	  }
+public void setCases_portee(int[][]cases_portee) { 
+	    this.cases_joueur=cases_portee; 
 	  }
   public void setBateauplace(int bateauplace) {
 	 this.bateauplace = bateauplace;
@@ -220,4 +228,29 @@ public class Joueur {
      	return cases;
         }
         
+        public int[][] get_player_range(){
+        	int taille=0;
+         	for(int i=0;i<5;i++)
+         	{   
+         		taille+=bateaux[i].cases_portee().length;
+         	}
+         	int k=0;      	
+         	int[][]cases = new int[taille][2];
+         	System.out.println("taille");
+         	//System.out.println(bateaux[0].cases_portee()[0][0]);
+         	//System.out.println(bateaux[0].cases_portee()[0][1]);
+         	
+         	for(int i=0;i<5;i++) {
+         		for(int j=0;j<bateaux[i].cases_portee().length;j++) {
+         			if(bateaux[i].cases_portee()[j]==null)k++;
+         			else
+         			{
+         				cases[k][0]=bateaux[i].cases_portee()[j][0];
+         				cases[k][1]=bateaux[i].cases_portee()[j][1];
+         				k++;      			
+	         		}
+	         	}
+         	}
+        return cases;    
+         	}
 } 
