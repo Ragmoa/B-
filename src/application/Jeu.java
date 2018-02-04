@@ -28,14 +28,17 @@ public class Jeu{
 	private Joueur j1;
 	private Joueur j2;
 	private Joueur j_actuel;
-	
+	private Label texteStatut = new Label(); //ratï¿½, rï¿½ussi, etc
+	private Label texteJoueurAct = new Label();
+	private int etapeJeu;//0=placement de bateau, 1=tir, 2=deplacement de bateau
+	private Label texteEtapeJeu = new Label(); ;
 	private Scene sceneMenu;
 	
 	public Jeu(Joueur j1, Joueur j2, Scene sceneMenu)
 	{		
 		this.j1=j1;
 		this.j2=j2;
-
+		this.etapeJeu=0;
         this.sceneMenu = sceneMenu;
 	}
 	
@@ -57,9 +60,9 @@ public class Jeu{
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
-        PanelJeu panelJoueur1 = new PanelJeu();//on crée un panel pour afficher le plateau avec les bateaux du joueur
+        PanelJeu panelJoueur1 = new PanelJeu();//on crï¿½e un panel pour afficher le plateau avec les bateaux du joueur
         groupJeu.getChildren().add(panelJoueur1);
-        PanelJeu panelAdversaire1 = new PanelJeu();//on crée un panel pour afficher le plateau avec les bateaux du joueur
+        PanelJeu panelAdversaire1 = new PanelJeu();//on crï¿½e un panel pour afficher le plateau avec les bateaux du joueur
         groupJeu.getChildren().add(panelAdversaire1);
         
         BorderPane border = new BorderPane();//le borderpane nous permet d'organiser nos elements dans la fenetre
@@ -72,6 +75,7 @@ public class Jeu{
         
         groupJeu.getChildren().add(border);
         
+        //On rï¿½cupï¿½re le clic et on lance une action 
         panelJoueur1.getGrid().setOnMouseClicked((event)-> { 
         	int ligneTemp=-1, colonneTemp=-1;
         	
@@ -85,9 +89,8 @@ public class Jeu{
                 }
             }
         	if(ligneTemp!=-1 && colonneTemp!=-1) {
-        		clic(panelJoueur1, colonneTemp, ligneTemp, true);
+        		clic(panelJoueur1, colonneTemp, ligneTemp, true); //true si panel de gauche, avec bateaux
         	}
-        	
         	if (event.getButton() == MouseButton.SECONDARY) {
                panelJoueur1.resetPanel();
             }
@@ -101,6 +104,17 @@ public class Jeu{
 		int i = 0;
 		j1.placer_bateau(colonne, ligne, i, true);		
 		System.out.println(j1.getBateau()[0].cases_ocupees()[0][0] + " " + j1.getBateau()[0].cases_ocupees()[0][1]);
+		switch(this.getEtapeJeu()) {
+		case 0 : //placement bateau dï¿½but partie
+			panel.majPanel(colonne, ligne, Content.boat_range);
+			break;
+		case 1 : //tir
+			break;
+		case 2 : //deplacement d'un bateau
+			break;
+		default :
+			break;
+		}	
 	}
 	
 	public HBox makeHbox()
@@ -111,12 +125,44 @@ public class Jeu{
 	    hbox.setId("infoPartie");
 	    //setStyle("-fx-background-color: #336699;");
 	    
-        Label nom1 = new Label(j1.getPseudo());
-        nom1.setFont(Font.font("Arial", FontWeight.BOLD, 35));
-        nom1.setStyle("-fx-effect: dropshadow(three-pass-box, #FFFFFF, 3, 0.8, 0, 0);");
-
-	    hbox.getChildren().addAll(nom1);
+        texteJoueurAct.setId("joueurAct");
+        texteJoueurAct.setText(j_actuel.getPseudo());
+        
+        texteEtapeJeu.setId("etapeJeu");
+        texteEtapeJeu.setText("Placez vos bateaux");
+        texteEtapeJeu.setTextFill(Color.WHITE);
+        
+        texteStatut.setId("statut");
+        texteStatut.setText("statut");
+        texteStatut.setTextFill(Color.WHITE);
+        
+	    hbox.getChildren().addAll(texteJoueurAct);
+	    hbox.getChildren().addAll(texteEtapeJeu);
+	    hbox.getChildren().addAll(texteStatut);
 
 	    return hbox;
+	}
+	
+	public void majHbox() {
+		switch(this.getEtapeJeu()) {
+		case 0 : //placement bateau dï¿½but partie
+			texteEtapeJeu.setText("Placez vos bateaux");
+			break;
+		case 1 : //tir
+			texteEtapeJeu.setText("Choisissez votre cible");
+			break;
+		case 2 : //deplacement d'un bateau
+			texteEtapeJeu.setText("Deplacez un bateau");
+			break;
+		default :
+			break;
+		}
+		
+		texteJoueurAct.setText(j_actuel.getPseudo());
+		
+	}
+	
+	public int getEtapeJeu() {
+		return this.etapeJeu;
 	}
 }

@@ -20,20 +20,9 @@
 	-fx-font-size: 20px;
 	-fx-font-weight: bold;
 }
-#colorJ1, #colorJ2 {
-	-fx-font-size: 12px;
-	-fx-font-weight: bold;
-}
-#colorJ1 .color-picker-label, #colorJ2 .color-picker-label {
-	visibility: false;
-}
 #vs {
 	-fx-text-fill: #FFFFFF;
 	-fx-font-size: 90px;
-	-fx-font-weight: bold;
-}
-#othello, #hexxagon {
-	-fx-font-size: 15px;
 	-fx-font-weight: bold;
 }
 #mode, #dernieresParties {
@@ -45,17 +34,8 @@
 	-fx-font-size: 13px;
 	-fx-font-weight: bold;
 }
-#taille, #inaccessible {
-	-fx-text-fill: #FFFFFF;
-	-fx-font-size: 20px;
-	-fx-font-weight: bold;
-}
 #jouer, #menuPrincipal {
 	-fx-font-size: 30px;
-	-fx-font-weight: bold;
-}
-#boxTaille, #boxInaccessible {
-	-fx-font-size: 15px;
 	-fx-font-weight: bold;
 }
 #gagnant {
@@ -78,4 +58,21 @@
 	-fx-border-insets: 8 5 0 10;
 	-fx-border-radius: 10;
 	-fx-border-color: white;
+}
+#joueurAct {
+	-fx-font-family : "Arial";
+	-fx-font-weight: bold;
+	-fx-font-size : 35;
+	-fx-effect: dropshadow(three-pass-box, #FFFFFF, 3, 0.8, 0, 0);
+}
+#etapeJeu {
+	-fx-font-family : "Arial";
+	-fx-font-weight: bold;
+	-fx-font-size : 35;
+}
+#statut {
+	-fx-font-family : "Arial";
+	-fx-font-weight: bold;
+	-fx-font-size : 35;
+	
 }

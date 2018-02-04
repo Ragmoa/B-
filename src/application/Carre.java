@@ -58,7 +58,7 @@ public class Carre extends Parent{
  			fondCarre.setStroke(Color.RED);
  			this.setOnMouseEntered(new EventHandler<MouseEvent>(){
  	            public void handle(MouseEvent me){
- 	                fondCarre.setFill(Color.GREY);
+ 	                fondCarre.setFill(Color.RED);
  	                fondCarre.setStroke(Color.RED);
  	            }
  	        });
@@ -82,6 +82,8 @@ public class Carre extends Parent{
  			break;
  		case miss:
  			Circle circle1 = new Circle(25, 25, 20);
+ 			circle1.setFill(Color.LIGHTBLUE);
+ 			circle1.setStroke(Color.BLACK);
  			this.getChildren().add(fondCarre); 
  			this.getChildren().add(circle1); 
  			break;
@@ -89,7 +91,7 @@ public class Carre extends Parent{
  			fondCarre.setFill(Color.LIGHTBLUE);
  			this.setOnMouseEntered(new EventHandler<MouseEvent>(){
  	            public void handle(MouseEvent me){
- 	                fondCarre.setFill(Color.GREY);
+ 	                fondCarre.setFill(Color.BLUE);
  	                fondCarre.setStroke(Color.BLACK);
  	            }
  	        });
@@ -105,8 +107,6 @@ public class Carre extends Parent{
  		default:
  			break;
         }
-		
-		//this.getChildren().add(fondCarre); 
     }
     
     public int getColonne() {

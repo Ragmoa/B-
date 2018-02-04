@@ -6,6 +6,9 @@ public class Joueur {
  
   private String pseudo; 
   private boolean ia; 
+  private Boat[] bateaux; 
+  private boolean peut_bouger;
+  private int[] coup_adversaire;
   private Boat[] bateaux;
   
  
@@ -14,6 +17,8 @@ public class Joueur {
     this.ia = ia;
     bateaux = new Boat[5];
   }
+    this.peut_bouger=true;
+  } 
  
   public String getPseudo() { 
     return pseudo; 
@@ -22,6 +27,18 @@ public class Joueur {
   public void setPseudo(String pseudo) { 
     this.pseudo = pseudo; 
   } 
+  
+  public boolean get_peut_bouger() {
+	  return peut_bouger;
+  }
+  
+  public void set_peut_bouger( boolean p) {
+	  this.peut_bouger=p;
+  }
+  
+  public int [] get_coup_adversaire () {
+	  return coup_adversaire;
+  }
   public boolean isIa() { 
     return ia; 
   } 
@@ -130,5 +147,27 @@ public class Joueur {
           npos[1]=y; 
           b.set_position(npos); 
           return ; 
-        } 
+        }
+        
+        public int tir_ennemi(int x, int y) {
+        	int i=0,j=0;
+        	for (i=0;i<5;i++) {
+        		if (this.bateaux[i]!=null) {
+        			for (j=0;j<this.bateaux[i].get_taille();j++) {
+        				if ( x==this.bateaux[i].cases_ocupees()[j][0] && y==this.bateaux[i].cases_ocupees()[j][1] ) {
+        					this.bateaux[i].hit(j);
+        					this.peut_bouger=false;
+        					if (this.bateaux[i].doit_couler()) {
+        						this.bateaux[i]=null;
+        						return 2;//COULÉ!
+        					} else {
+        						return 1; //TOUCHÉ!
+        					}
+        				}
+        		}
+        	}
+        	}
+        	return 0; // DANS L'EAU!
+        }
+        
 } 
