@@ -10,18 +10,33 @@ public class Joueur {
   private boolean peut_bouger;
   private int[] coup_adversaire;
   private int bateauplace;
+  private int[][] status; //0=rien, -1=rate, 1=touche
   private int[][] cases_joueur;
   
  
   public Joueur(String pseudo, boolean ia) { 
-    this.pseudo = pseudo; 
+    int i,j=0;
+	this.pseudo = pseudo; 
     this.ia = ia;
     bateaux = new Boat[5];
     this.peut_bouger=true;
     this.bateauplace = 0;
     cases_joueur = new int[17][2];
+    this.status=new int[10][10];
+    for (i=0;i<10;i++) {
+    	for (j=0;j<10;j++) {
+    		this.status[i][j]=0;
+    	}
+    }
   }
 
+  public int[][] get_status(){
+	  return this.status;
+  }
+  
+  public void set_status( int x, int y, int st) {
+	  this.status[x][y]=st;
+  }
   
   public String getPseudo() { 
     return pseudo; 
