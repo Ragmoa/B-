@@ -195,4 +195,11 @@ public class Joueur {
         	return 0; // DANS L'EAU!
         }
         
+        public boolean a_perdu() {
+        	if (bateaux[0]==null && bateaux[1]==null && bateaux[2]==null && bateaux[3]==null && bateaux[4]==null) {
+        		return true;
+        	}
+        	return false;
+        }
+        
 } 
