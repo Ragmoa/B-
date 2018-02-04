@@ -45,9 +45,9 @@ public class PanelJeu extends Parent {
     
     public void resetPanel(){
         int i,j;
-        for(i=0;i<8;i++)
+        for(i=0;i<10;i++)
         {
-            for(j=0;j<8;j++)
+            for(j=0;j<10;j++)
             {
             	liste.get(i).get(j).majCarre(Content.sea);
             }
