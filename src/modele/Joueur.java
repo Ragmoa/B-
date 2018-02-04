@@ -255,7 +255,9 @@ public void setCases_portee(int[][]cases_portee) {
         			j++;
         		}
         	}
-        	res[j]=null;	
+        	if (j<2) {
+        		res[j]=null;
+        	}
         	return res;
         }
         
