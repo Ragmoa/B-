@@ -188,6 +188,7 @@ public void setCases_portee(int[][]cases_portee) {
           return ; 
         }
         
+        
         public int tir_ennemi(int x, int y) {
         	int i=0,j=0;
         	for (i=0;i<5;i++) {
@@ -210,22 +211,52 @@ public void setCases_portee(int[][]cases_portee) {
         }
         public int[][] get_player_boat(){
      	
-     	int taille=0;
-     	for(int i=0;i<this.getBateauplace();i++)
-     	{    		
-     		taille+=bateaux[i].get_taille();
-     	}
-     	int k=0;
-     	int[][]cases = new int[taille][2];
-     	
-     	for(int i=0;i<this.bateauplace;i++) {
-     		for(int j=0;j<bateaux[i].cases_ocupees().length;j++) {
-     			cases[k][0]=bateaux[i].cases_ocupees()[j][0];
-     			cases[k][1]=bateaux[i].cases_ocupees()[j][1];
-     			k++;
-     		}
-     	}
-     	return cases;
+		 	int taille=0;
+		 	for(int i=0;i<this.getBateauplace();i++)
+		 	{    
+		 		if(bateaux[i]!=null) {
+		 			taille+=bateaux[i].get_taille();
+		 		}	 		
+		 	}
+		 	int k=0;
+		 	int[][]cases = new int[taille][2];
+		 	
+		 	for(int i=0;i<this.bateauplace;i++) {
+		 		if(bateaux[i]!=null) {
+		 			for(int j=0;j<bateaux[i].cases_ocupees().length;j++) {
+			 			cases[k][0]=bateaux[i].cases_ocupees()[j][0];
+			 			cases[k][1]=bateaux[i].cases_ocupees()[j][1];
+			 			k++;
+			 		}
+		 		}
+		 	}
+		 	return cases;
+        }
+        
+        public boolean a_perdu() {
+        	if (bateaux[0]==null && bateaux[1]==null && bateaux[2]==null && bateaux[3]==null && bateaux[4]==null) {
+        		return true;
+        	}
+        	return false;
+        }
+        
+        public int [][] cases_touchees(int number){// Si le bateau est détruit, retourne null.
+        	int [][] res= new int[2][2];
+        	int i=0,j=0;
+        	if (this.bateaux[number]==null) {
+        		res=null;
+        		return res;
+        	}
+        	for (i=0;i<this.bateaux[number].get_taille();i++) {
+        		if (this.bateaux[number].is_hit(i)) {
+        			System.out.println(i);
+        			System.out.println(this.bateaux[number].is_hit(i));
+        			res[j][0]=this.bateaux[number].cases_ocupees()[i][0];
+        			res[j][1]=this.bateaux[number].cases_ocupees()[i][1];
+        			j++;
+        		}
+        	}
+        	return res;
         }
         
         public int[][] get_player_range(){
