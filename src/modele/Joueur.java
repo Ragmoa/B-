@@ -180,6 +180,7 @@ public class Joueur {
           return ; 
         }
         
+        
         public int tir_ennemi(int x, int y) {
         	int i=0,j=0;
         	for (i=0;i<5;i++) {
@@ -229,6 +230,23 @@ public class Joueur {
         		return true;
         	}
         	return false;
+        }
+        
+        public int [][] cases_touchees(int number){// Si le bateau est détruit, retourne null.
+        	int [][] res= new int[2][2];
+        	int i=0,j=0;
+        	if (this.bateaux[number]==null) {
+        		res=null;
+        		return res;
+        	}
+        	for (i=0;i<this.bateaux[number].get_taille();i++) {
+        		if (this.bateaux[number].is_hit(i)) {
+        			res[j][0]=this.bateaux[number].cases_ocupees()[i][0];
+        			res[j][0]=this.bateaux[number].cases_ocupees()[i][1];
+        			j++;
+        		}
+        	}
+        	return res;
         }
         
 } 
