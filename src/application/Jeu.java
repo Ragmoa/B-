@@ -117,10 +117,15 @@ public class Jeu{
 	public void clic(PanelJeu panel, int colonne, int ligne, boolean playerSide, PanelJeu autrePanel) {
 		System.out.println("case " + colonne + " " + ligne);		
 		switch(this.getEtapeJeu()) {
-		case 0 : //placement bateau début partie
+		case 0 : //placement bateau dï¿½but partie
 			if(playerSide==true){
 				panel.majPanel(colonne, ligne, Content.boat_range);
 				j_actuel.setBateauplace(j_actuel.placer_bateau(colonne, ligne, j_actuel.getBateauplace(), true));
+				 j_actuel.setCases_joueur(j_actuel.get_player_boat()); 
+			       
+			      for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
+			        panel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat); 
+			        } 
 				if(j_actuel.getBateauplace()==5) {
 					panel.resetPanel();
 					autrePanel.resetPanel();		
@@ -142,7 +147,7 @@ public class Jeu{
 					reponse=j1.tir_ennemi(colonne, ligne);
 					System.out.println("tir sur" + j1.getPseudo() + " : " +reponse);
 				}
-				//gestion des touchés/ratés
+				//gestion des touchï¿½s/ratï¿½s
 				//TODO verifier la range
 				if(reponse==0) {
 					panel.majPanel(colonne, ligne, Content.miss);
@@ -168,6 +173,9 @@ public class Jeu{
 			break;
 		case 3 : //attente avant de changer de joueur
 			if(playerSide==false) {
+				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
+			        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat); 
+			        }
 				//On replace les hit/miss pour la suite
 				int tableauDroite[][]=j_actuel.get_status();
 				for(int i=0; i<10; i++) {
@@ -237,10 +245,10 @@ public class Jeu{
 			texteEtapeJeu.setText(" | Choisissez votre cible");
 			break;
 		case 2 : //attente apres tir
-			texteEtapeJeu.setText(" | Cliquez sur une case à droite pour finir le tour");
+			texteEtapeJeu.setText(" | Cliquez sur une case ï¿½ droite pour finir le tour");
 			break;
 		case 3 : //attente avant de changer de joueur
-			texteEtapeJeu.setText(" | Cliquez sur une case à droite pour commencer");
+			texteEtapeJeu.setText(" | Cliquez sur une case ï¿½ droite pour commencer");
 			break;
 		case 4 : //deplacement d'un bateau
 			texteEtapeJeu.setText(" | Deplacez un bateau");
@@ -254,10 +262,10 @@ public class Jeu{
 			texteStatut.setText(" | En attente...");
 			break;
 		case 1 : 
-			texteStatut.setText(" | Tir réussi !");
+			texteStatut.setText(" | Tir rï¿½ussi !");
 			break;
 		case 2 :
-			texteStatut.setText(" | Tir raté...");
+			texteStatut.setText(" | Tir ratï¿½...");
 			break;
 		case 3 :
 			texteStatut.setText(" | Changement de joueur");
