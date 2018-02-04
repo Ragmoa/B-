@@ -11,8 +11,7 @@ public class Joueur {
  
   public Joueur(String pseudo, boolean ia) { 
     this.pseudo = pseudo; 
-    this.ia = ia; 
-    int pos[] = {0,0}; 
+    this.ia = ia;
   } 
  
   public String getPseudo() { 
@@ -47,26 +46,33 @@ public class Joueur {
     } 
   }
   
-  public void creer_bateau() {
-	  int pos[] = {0,0}; 
-   bateaux[0]=new Boat(5,2,true,pos);
-   bateaux[1]=new Boat(4,2,true,pos);
-   bateaux[2]=new Boat(3,2,true,pos);
-   bateaux[3]=new Boat(3,4,true,pos);
-   bateaux[4]=new Boat(2,5,true,pos);
-  }
+
  
-   public int placer_bateau(int x , int y, int i){ 
-	   int pos[] = {x,y}; 
+   public int placer_bateau(int x , int y, int i, boolean horizontal){ 
+	   int pos[] = {x,y};
+	   Boat b = new Boat();
+	   
     	   if((bateaux[i].get_taille()+x < 10 && bateaux[i].is_horizontal()) || (bateaux[i].get_taille()+y < 10 && !bateaux[i].is_horizontal() )) 
-    	   {         	 
-    		   if(!check_collision(bateaux[i])){
-    			   bateaux[i].set_position(pos);
+    	   {
+    		   if(i==0) {
+    			   bateaux[0]=new Boat(5,2,true,pos);
     			   i++;
     		   }
-    	   }
+    		   else if(i==1)b=new Boat(4,2,true,pos);
+    		   else if(i==2)b=new Boat(3,2,true,pos);
+    		   else if(i==3)b=new Boat(3,4,true,pos);
+    		   else if(i==4)b=new Boat(2,5,true,pos);
+    		   if(!check_collision(b) && i!=0){		  
+    			   if(i==1)bateaux[1]=new Boat(4,2,true,pos);
+    			   else if(i==2)bateaux[2]=new Boat(3,2,true,pos);
+    			   else if(i==3)bateaux[3]=new Boat(3,4,true,pos);
+    			   else if(i==4)bateaux[4]=new Boat(2,5,true,pos);
+    			   i++;
+    			 }
+    			   
+    		   }
     	   return i;
-   }
+   			}
  
  
       public boolean check_collision (Boat b){ 
@@ -85,9 +91,27 @@ public class Joueur {
         return false; 
       } 
  
-     /* public boolean check_collision (Boat b, int x, int y){ 
- 
-      }*/ 
+      public boolean check_collision (Boat b, int x, int y){ 
+          int ox=b.get_position()[0]; 
+          int oy=b.get_position()[1]; 
+          int i=0, j=0,k=0; 
+          bouger(b,x,y); 
+          for (i=0;i<5;i++){ 
+            if (this.bateaux[i]!=null && this.bateaux[i].get_taille()!=b.get_taille() && this.bateaux[i].get_portee()!=b.get_portee()){ 
+              for (j=0;j<this.bateaux[i].get_taille();j++){ 
+                for (k=0;k<b.get_taille();k++){ 
+                  if (b.cases_ocupees()[k][0]==this.bateaux[i].cases_ocupees()[j][0] && b.cases_ocupees()[k][1]==this.bateaux[i].cases_ocupees()[j][1]){ 
+                    bouger(b,ox,oy); 
+                    return true; 
+                  } 
+                } 
+              } 
+            } 
+          } 
+          bouger(b,ox,oy);// 
+          return false;
+      }
+          
       public Boat select_bateau(int x, int y) {//TODO: D�placer dans Joueur_humain 
           int i=0, j=0; 
             for (i=0;i<5;i++){ 
