@@ -178,33 +178,16 @@ public class Jeu{
 						panel.majPanel(colonne, ligne, Content.hit);
 						j_actuel.set_status(colonne, ligne, 1);
 						this.statut=1;
+					}				
+					//Condition de victoire
+					if(j1.a_perdu() || j2.a_perdu()) {
+						this.etapeJeu=0;
+						panelVictoire = new PanelVictoire();
+	    				panelVictoire.afficherVictoire(primaryStage, sceneMenu, j_actuel);
 					}
 					this.etapeJeu=2;
 				}
-				else {
-					reponse=j1.tir_ennemi(colonne, ligne);
-					System.out.println("tir sur" + j1.getPseudo() + " : " +reponse);
-				}
-				//gestion des touch�s/rat�s
-				//TODO verifier la range
-				if(reponse==0) {
-					panel.majPanel(colonne, ligne, Content.miss);
-					j_actuel.set_status(colonne, ligne, -1);
-					this.statut=2;
-				}
-				else {
-					panel.majPanel(colonne, ligne, Content.hit);
-					j_actuel.set_status(colonne, ligne, 1);
-					this.statut=1;
-				}
-				
-				//Condition de victoire
-				if(j1.a_perdu() || j2.a_perdu()) {
-					this.etapeJeu=0;
-					panelVictoire = new PanelVictoire();
-    				panelVictoire.afficherVictoire(primaryStage, sceneMenu, j_actuel);
-				}
-				this.etapeJeu=2;					
+				else this.etapeJeu=1;
 			}
 			break;
 		case 2 : //attente apres tir
