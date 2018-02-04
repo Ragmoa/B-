@@ -90,6 +90,7 @@ public class Jeu{
             }
         	if(ligneTemp!=-1 && colonneTemp!=-1) {
         		clic(panelJoueur1, colonneTemp, ligneTemp, true); //true si panel de gauche, avec bateaux
+        		majHbox();
         	}
         });
         
@@ -106,29 +107,41 @@ public class Jeu{
             }
         	if(ligneTemp!=-1 && colonneTemp!=-1) {
         		clic(panelAdversaire1, colonneTemp, ligneTemp, false); //false si panel de droite, celui de l'adversaire
+        		majHbox();
         	}
         });
 	}
 	
 	public void clic(PanelJeu panel, int colonne, int ligne, boolean playerSide) {
-		System.out.println("case " + colonne + " " + ligne);
-		panel.majPanel(colonne, ligne, Content.hit);		
+		System.out.println("case " + colonne + " " + ligne);		
 		switch(this.getEtapeJeu()) {
-		case 0 : //placement bateau dï¿½but partie
-			panel.majPanel(colonne, ligne, Content.boat_range);
-			j1.setBateauplace(j1.placer_bateau(colonne, ligne, j1.getBateauplace(), true));
-			if(j1.getBateauplace()==5)this.etapeJeu=1;
-			//System.out.println(j1.getBateau()[0].cases_ocupees()[0][0] + " " + j1.getBateau()[0].cases_ocupees()[0][1]);
-			//System.out.println(j1.getBateauplace());
-			
+		case 0 : //placement bateau début partie
+			if(playerSide==true){
+				panel.majPanel(colonne, ligne, Content.boat_range);
+				j1.setBateauplace(j1.placer_bateau(colonne, ligne, j1.getBateauplace(), true));
+				if(j1.getBateauplace()==5)this.etapeJeu=1;
+			}
 			break;
 		case 1 : //tir
+			if(playerSide==false) {
+				panel.majPanel(colonne, ligne, Content.hit);	
+			}
 			break;
 		case 2 : //deplacement d'un bateau
 			break;
 		default :
 			break;
 		}	
+	}
+	
+	public void changeTour()
+	{
+		if(j_actuel.getPseudo().equals(j1.getPseudo())) {
+			j_actuel=j2;
+		}
+		else {
+			j_actuel=j1;
+		}
 	}
 	
 	public HBox makeHbox()
@@ -172,8 +185,7 @@ public class Jeu{
 			break;
 		}
 		
-		texteJoueurAct.setText(j_actuel.getPseudo());
-		
+		texteJoueurAct.setText(j_actuel.getPseudo());	
 	}
 	
 	public int getEtapeJeu() {
