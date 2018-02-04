@@ -28,14 +28,17 @@ public class Jeu{
 	private Joueur j1;
 	private Joueur j2;
 	private Joueur j_actuel;
-	
+	private Label texteStatut = new Label(); //raté, réussi, etc
+	private Label texteJoueurAct = new Label();
+	private int etapeJeu;//0=placement de bateau, 1=tir, 2=deplacement de bateau
+	private Label texteEtapeJeu = new Label(); ;
 	private Scene sceneMenu;
 	
 	public Jeu(Joueur j1, Joueur j2, Scene sceneMenu)
 	{		
 		this.j1=j1;
 		this.j2=j2;
-
+		this.etapeJeu=0;
         this.sceneMenu = sceneMenu;
 	}
 	
@@ -72,6 +75,7 @@ public class Jeu{
         
         groupJeu.getChildren().add(border);
         
+        //On récupère le clic et on lance une action 
         panelJoueur1.getGrid().setOnMouseClicked((event)-> { 
         	int ligneTemp=-1, colonneTemp=-1;
         	
@@ -85,9 +89,8 @@ public class Jeu{
                 }
             }
         	if(ligneTemp!=-1 && colonneTemp!=-1) {
-        		clic(panelJoueur1, colonneTemp, ligneTemp, true);
+        		clic(panelJoueur1, colonneTemp, ligneTemp, true); //true si panel de gauche, avec bateaux
         	}
-        	
         	if (event.getButton() == MouseButton.SECONDARY) {
                panelJoueur1.resetPanel();
             }
@@ -97,7 +100,17 @@ public class Jeu{
 	
 	public void clic(PanelJeu panel, int colonne, int ligne, boolean playerSide) {
 		System.out.println("case " + colonne + " " + ligne);
-		panel.majPanel(colonne, ligne, Content.hit);
+		switch(this.getEtapeJeu()) {
+		case 0 : //placement bateau début partie
+			panel.majPanel(colonne, ligne, Content.boat_range);
+			break;
+		case 1 : //tir
+			break;
+		case 2 : //deplacement d'un bateau
+			break;
+		default :
+			break;
+		}	
 	}
 	
 	public HBox makeHbox()
@@ -108,12 +121,44 @@ public class Jeu{
 	    hbox.setId("infoPartie");
 	    //setStyle("-fx-background-color: #336699;");
 	    
-        Label nom1 = new Label(j1.getPseudo());
-        nom1.setFont(Font.font("Arial", FontWeight.BOLD, 35));
-        nom1.setStyle("-fx-effect: dropshadow(three-pass-box, #FFFFFF, 3, 0.8, 0, 0);");
-
-	    hbox.getChildren().addAll(nom1);
+        texteJoueurAct.setId("joueurAct");
+        texteJoueurAct.setText(j_actuel.getPseudo());
+        
+        texteEtapeJeu.setId("etapeJeu");
+        texteEtapeJeu.setText("Placez vos bateaux");
+        texteEtapeJeu.setTextFill(Color.WHITE);
+        
+        texteStatut.setId("statut");
+        texteStatut.setText("statut");
+        texteStatut.setTextFill(Color.WHITE);
+        
+	    hbox.getChildren().addAll(texteJoueurAct);
+	    hbox.getChildren().addAll(texteEtapeJeu);
+	    hbox.getChildren().addAll(texteStatut);
 
 	    return hbox;
+	}
+	
+	public void majHbox() {
+		switch(this.getEtapeJeu()) {
+		case 0 : //placement bateau début partie
+			texteEtapeJeu.setText("Placez vos bateaux");
+			break;
+		case 1 : //tir
+			texteEtapeJeu.setText("Choisissez votre cible");
+			break;
+		case 2 : //deplacement d'un bateau
+			texteEtapeJeu.setText("Deplacez un bateau");
+			break;
+		default :
+			break;
+		}
+		
+		texteJoueurAct.setText(j_actuel.getPseudo());
+		
+	}
+	
+	public int getEtapeJeu() {
+		return this.etapeJeu;
 	}
 }
