@@ -50,7 +50,7 @@ public class Joueur {
  
    public int placer_bateau(int x , int y, int i, boolean horizontal){ 
 	   int pos[] = {x,y};
-	   Boat b = new Boat();
+	   Boat b=new Boat(0,0,true, pos);
 	   
     	   if((bateaux[i].get_taille()+x < 10 && bateaux[i].is_horizontal()) || (bateaux[i].get_taille()+y < 10 && !bateaux[i].is_horizontal() )) 
     	   {
@@ -62,7 +62,7 @@ public class Joueur {
     		   else if(i==2)b=new Boat(3,2,true,pos);
     		   else if(i==3)b=new Boat(3,4,true,pos);
     		   else if(i==4)b=new Boat(2,5,true,pos);
-    		   if(!check_collision(b) && i!=0){		  
+    		   if(i!=0 && !check_collision(b) ){		  
     			   if(i==1)bateaux[1]=new Boat(4,2,true,pos);
     			   else if(i==2)bateaux[2]=new Boat(3,2,true,pos);
     			   else if(i==3)bateaux[3]=new Boat(3,4,true,pos);
