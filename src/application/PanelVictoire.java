@@ -18,7 +18,7 @@ public class PanelVictoire {
 	private GridPane gridVictoire;
 	private Scene scene;
 	
-	private Label victoire, gagnant, dernieresParties;
+	private Label victoire, gagnant;
 	private Button menuPrincipal;
 	
 	public PanelVictoire() {

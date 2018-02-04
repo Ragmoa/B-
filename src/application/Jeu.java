@@ -46,16 +46,17 @@ public class Jeu{
         this.sceneMenu = sceneMenu;
 	}
 	
-	public void jouer(Stage primaryStage){        
+	public void jouer(Stage primaryStage){   
+		this.primaryStage=primaryStage;
 		if(j2.isIa()){
-        	//pve(primaryStage); //joueur versus IA
+        	//pve(); //joueur versus IA
         }
         else{
-        	pvp(primaryStage); //joueur versus joueur
+        	pvp(); //joueur versus joueur
         }
 	}
 	
-	public void pvp(Stage primaryStage)
+	public void pvp()
 	{	
         j_actuel=j1;
 
@@ -174,6 +175,7 @@ public class Jeu{
 				
 				//Condition de victoire
 				if(j1.a_perdu() || j2.a_perdu()) {
+					this.etapeJeu=0;
 					panelVictoire = new PanelVictoire();
     				panelVictoire.afficherVictoire(primaryStage, sceneMenu, j_actuel);
 				}

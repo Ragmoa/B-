@@ -12,8 +12,8 @@ import modele.MenuPrincipal;
 
 public class PanelMenuPrincipal {
     
-	private GridPane gridMenu = new GridPane();
-	private MenuPrincipal menu = new MenuPrincipal();
+	private GridPane gridMenu;
+	private MenuPrincipal menu;
     
 	private Jeu mainOthello;
     
@@ -31,6 +31,9 @@ public class PanelMenuPrincipal {
 	}
 	
 	public void afficherMenu(Stage primaryStage) {
+		this.menu= new MenuPrincipal();
+		this.gridMenu = new GridPane();
+		
 		gridMenu = new GridPane();
 		gridMenu.setHgap(20); 
 		gridMenu.setVgap(20);
