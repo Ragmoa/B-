@@ -9,6 +9,7 @@ public class Joueur {
   private boolean ia; 
   private Boat[] bateaux; 
   private boolean peut_bouger;
+  private int[] coup_adversaire;
  
   public Joueur(String pseudo, boolean ia) { 
     this.pseudo = pseudo; 
@@ -23,6 +24,18 @@ public class Joueur {
   public void setPseudo(String pseudo) { 
     this.pseudo = pseudo; 
   } 
+  
+  public boolean get_peut_bouger() {
+	  return peut_bouger;
+  }
+  
+  public void set_peut_bouger( boolean p) {
+	  this.peut_bouger=p;
+  }
+  
+  public int [] get_coup_adversaire () {
+	  return coup_adversaire;
+  }
   public boolean isIa() { 
     return ia; 
   } 
@@ -133,6 +146,7 @@ public class Joueur {
           b.set_position(npos); 
           return ; 
         }
+        
         public int tir_ennemi(int x, int y) {
         	int i=0,j=0;
         	for (i=0;i<5;i++) {
