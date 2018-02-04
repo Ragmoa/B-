@@ -10,7 +10,7 @@ public class Joueur {
   private boolean peut_bouger;
   private int[] coup_adversaire;
   private int bateauplace;
-  private int[][] status;
+  private int[][] status; //0=rien, -1=rate, 1=touche
   
  
   public Joueur(String pseudo, boolean ia) { 

@@ -62,7 +62,7 @@
 #joueurAct {
 	-fx-font-family : "Arial";
 	-fx-font-weight: bold;
-	-fx-font-size : 35;
+	-fx-font-size : 30;
 	-fx-effect: dropshadow(three-pass-box, #FFFFFF, 3, 0.8, 0, 0);
 }
 #etapeJeu {
@@ -73,6 +73,6 @@
 #statut {
 	-fx-font-family : "Arial";
 	-fx-font-weight: bold;
-	-fx-font-size : 35;
+	-fx-font-size : 30;
 	
 }

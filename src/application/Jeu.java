@@ -143,23 +143,46 @@ public class Jeu{
 					System.out.println("tir sur" + j1.getPseudo() + " : " +reponse);
 				}
 				//gestion des touchés/ratés
+				//TODO verifier la range
 				if(reponse==0) {
 					panel.majPanel(colonne, ligne, Content.miss);
+					j_actuel.set_status(colonne, ligne, -1);
 					this.statut=2;
 				}
 				else {
 					panel.majPanel(colonne, ligne, Content.hit);
+					j_actuel.set_status(colonne, ligne, 1);
 					this.statut=1;
 				}
 				this.etapeJeu=2;					
 			}
 			break;
 		case 2 : //attente apres tir
-			this.etapeJeu=1;
-			this.statut=0;
+			this.etapeJeu=3;
+			this.statut=0;	
+			panel.resetPanel();
+			autrePanel.resetPanel();
 			changeTour();
 			break;
-		case 3 : //deplacement d'un bateau
+		case 3 : //attente avant de changer de joueur
+			if(playerSide==false) {
+				//On replace les hit/miss pour la suite
+				int tableauDroite[][]=j_actuel.get_status();
+				for(int i=0; i<10; i++) {
+					for(int j=0; j<10; j++) {
+						if(tableauDroite[i][j]==-1) {
+							panel.majPanel(i, j, Content.miss);
+						}
+						else if(tableauDroite[i][j]==1) {
+							panel.majPanel(i, j, Content.hit);
+						}
+					}
+				}
+				this.etapeJeu=1;
+			}
+			break;
+		case 4 : //deplacement d'un bateau
+			
 			this.etapeJeu=1;
 			break;
 		default :
@@ -214,7 +237,10 @@ public class Jeu{
 		case 2 : //attente apres tir
 			texteEtapeJeu.setText(" | Cliquez sur une case pour finir votre tour");
 			break;
-		case 3 : //deplacement d'un bateau
+		case 3 : //attente avant de changer de joueur
+			texteEtapeJeu.setText(" | Cliquez sur une case à droite pour commencer");
+			break;
+		case 4 : //deplacement d'un bateau
 			texteEtapeJeu.setText(" | Deplacez un bateau");
 			break;
 		default :
