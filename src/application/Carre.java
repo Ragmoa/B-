@@ -104,6 +104,52 @@ public class Carre extends Parent{
  	        }); 
  	        this.getChildren().add(fondCarre); 
  			break;
+ 		case boat_range_and_hit:
+ 			fondCarre.setStroke(Color.RED);
+ 			Line line3 = new Line(5, 5, 45, 45);
+ 		    line3.setStroke(Color.BLACK);
+	    	Line line4 = new Line(45, 5, 5, 45);
+		    line4.setStroke(Color.BLACK);
+ 			this.setOnMouseEntered(new EventHandler<MouseEvent>(){
+ 	            public void handle(MouseEvent me){
+ 	                fondCarre.setFill(Color.RED);
+ 	                fondCarre.setStroke(Color.RED);
+ 	            }
+ 	        });
+
+ 	        this.setOnMouseExited(new EventHandler<MouseEvent>(){
+ 	            public void handle(MouseEvent me){
+ 	                fondCarre.setFill(Color.LIGHTBLUE);
+ 	                fondCarre.setStroke(Color.RED);
+ 	            }
+ 	        }); 
+ 	        this.getChildren().add(fondCarre); 
+        	this.getChildren().add(line3);
+		    this.getChildren().add(line4);
+ 			break;
+ 		case boat_range_and_miss:
+ 			fondCarre.setStroke(Color.RED);
+ 			Circle circle2 = new Circle(25, 25, 20);
+ 			circle2.setFill(Color.LIGHTBLUE);
+ 			circle2.setStroke(Color.BLACK);
+ 			this.setOnMouseEntered(new EventHandler<MouseEvent>(){
+ 	            public void handle(MouseEvent me){
+ 	                fondCarre.setFill(Color.RED);
+ 	                fondCarre.setStroke(Color.RED);
+ 	                circle2.setFill(Color.RED);
+ 	            }
+ 	        });
+
+ 	        this.setOnMouseExited(new EventHandler<MouseEvent>(){
+ 	            public void handle(MouseEvent me){
+ 	                fondCarre.setFill(Color.LIGHTBLUE);
+ 	                fondCarre.setStroke(Color.RED);
+ 	               circle2.setFill(Color.LIGHTBLUE);
+ 	            }
+ 	        }); 
+ 	        this.getChildren().add(fondCarre); 
+        	this.getChildren().add(circle2); 
+ 			break;
  		default:
  			break;
         }
