@@ -9,11 +9,15 @@ public class Boat {
     private int portee; // La portée de tir du bateau.
 
     public Boat(int taille, int portee,boolean horizontal, int[] pos ){
+    	int i=0;
       this.taille=taille;
       this.portee=portee;
       this.horizontal=horizontal;
       this.position=pos;
       this.cases_touchees=new boolean[taille];
+      for(i=0;i<taille;i++) {
+    	  this.cases_touchees[i]=false;
+      }
     }
 
     public void set_position(int[] position){
@@ -26,6 +30,7 @@ public class Boat {
       return horizontal;
     }
     public void hit(int c){
+    	System.out.println("coucous");
       if (c<0 && c>taille){
         return;
       } else{

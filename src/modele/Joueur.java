@@ -241,6 +241,8 @@ public class Joueur {
         	}
         	for (i=0;i<this.bateaux[number].get_taille();i++) {
         		if (this.bateaux[number].is_hit(i)) {
+        			System.out.println(i);
+        			System.out.println(this.bateaux[number].is_hit(i));
         			res[j][0]=this.bateaux[number].cases_ocupees()[i][0];
         			res[j][0]=this.bateaux[number].cases_ocupees()[i][1];
         			j++;
