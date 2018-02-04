@@ -98,6 +98,9 @@ public class Jeu{
 	public void clic(PanelJeu panel, int colonne, int ligne, boolean playerSide) {
 		System.out.println("case " + colonne + " " + ligne);
 		panel.majPanel(colonne, ligne, Content.hit);
+		int i = 0;
+		j1.placer_bateau(colonne, ligne, i, true);		
+		System.out.println(j1.getBateau()[0].cases_ocupees()[0][0] + " " + j1.getBateau()[0].cases_ocupees()[0][1]);
 	}
 	
 	public HBox makeHbox()
