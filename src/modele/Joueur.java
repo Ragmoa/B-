@@ -108,7 +108,7 @@ public class Joueur {
 						}
 					}
 				}
-				bouger(b,ox,oy);
+				bouger(b,ox,oy);//
 				return false;
 			}
 
