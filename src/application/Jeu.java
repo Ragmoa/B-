@@ -34,7 +34,8 @@ public class Jeu{
 	private int etapeJeu;//0=placement de bateau, 1=tir, 2=attente apres tir, 3=deplacement de bateau
 	private Label texteEtapeJeu = new Label(); ;
 	private Scene sceneMenu;
-	
+	private PanelVictoire panelVictoire;
+	private Stage primaryStage;
 	
 	public Jeu(Joueur j1, Joueur j2, Scene sceneMenu)
 	{		
@@ -45,16 +46,17 @@ public class Jeu{
         this.sceneMenu = sceneMenu;
 	}
 	
-	public void jouer(Stage primaryStage){        
+	public void jouer(Stage primaryStage){   
+		this.primaryStage=primaryStage;
 		if(j2.isIa()){
-        	//pve(primaryStage); //joueur versus IA
+        	//pve(); //joueur versus IA
         }
         else{
-        	pvp(primaryStage); //joueur versus joueur
+        	pvp(); //joueur versus joueur
         }
 	}
 	
-	public void pvp(Stage primaryStage)
+	public void pvp()
 	{	
         j_actuel=j1;
 
@@ -91,7 +93,12 @@ public class Jeu{
                 }
             }
         	if(ligneTemp!=-1 && colonneTemp!=-1) {
-        		clic(panelJoueur1, colonneTemp, ligneTemp, true, panelAdversaire1); //true si panel de gauche, avec bateaux
+        		if (event.getButton() == MouseButton.SECONDARY) {
+            		clicDroit(panelJoueur1, colonneTemp, ligneTemp, true, panelAdversaire1); //true si panel de gauche, avec bateaux
+                }
+        		else {
+            		clic(panelJoueur1, colonneTemp, ligneTemp, true, panelAdversaire1); //true si panel de gauche, avec bateaux
+        		}
         		majHbox();
         	}
         });
@@ -108,7 +115,12 @@ public class Jeu{
                 }
             }
         	if(ligneTemp!=-1 && colonneTemp!=-1) {
-        		clic(panelAdversaire1, colonneTemp, ligneTemp, false, panelJoueur1); //false si panel de droite, celui de l'adversaire
+        		if (event.getButton() == MouseButton.SECONDARY) {
+            		clicDroit(panelAdversaire1, colonneTemp, ligneTemp, false, panelJoueur1); //false si panel de droite, celui de l'adversaire
+        		}
+        		else {
+            		clic(panelAdversaire1, colonneTemp, ligneTemp, false, panelJoueur1); //false si panel de droite, celui de l'adversaire
+        		}
         		majHbox();
         	}
         });
@@ -169,7 +181,30 @@ public class Jeu{
 					}
 					this.etapeJeu=2;
 				}
-				else this.etapeJeu=1;			              
+				else {
+					reponse=j1.tir_ennemi(colonne, ligne);
+					System.out.println("tir sur" + j1.getPseudo() + " : " +reponse);
+				}
+				//gestion des touch�s/rat�s
+				//TODO verifier la range
+				if(reponse==0) {
+					panel.majPanel(colonne, ligne, Content.miss);
+					j_actuel.set_status(colonne, ligne, -1);
+					this.statut=2;
+				}
+				else {
+					panel.majPanel(colonne, ligne, Content.hit);
+					j_actuel.set_status(colonne, ligne, 1);
+					this.statut=1;
+				}
+				
+				//Condition de victoire
+				if(j1.a_perdu() || j2.a_perdu()) {
+					this.etapeJeu=0;
+					panelVictoire = new PanelVictoire();
+    				panelVictoire.afficherVictoire(primaryStage, sceneMenu, j_actuel);
+				}
+				this.etapeJeu=2;					
 			}
 			break;
 		case 2 : //attente apres tir
@@ -223,6 +258,23 @@ public class Jeu{
 		default :
 			break;
 		}	
+	}
+	
+	public void clicDroit(PanelJeu panel, int colonne, int ligne, boolean playerSide, PanelJeu autrePanel) {
+		switch(this.getEtapeJeu()) {
+		case 0:
+			break;
+		case 1 :
+			break;
+		case 2 :
+			break;
+		case 3 :
+			break;
+		case 4 :
+			break;
+		default :
+			break;
+		}
 	}
 	
 	public void changeTour()

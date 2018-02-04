@@ -15,7 +15,8 @@ public class Joueur {
   private int[][] cases_portee;
   
  
-  public Joueur(String pseudo, boolean ia) { 
+  public Joueur(String pseudo, boolean ia) {
+	  System.out.println("new player");
     int i,j=0;
 	this.pseudo = pseudo; 
     this.ia = ia;
@@ -255,7 +256,9 @@ public void setCases_portee(int[][]cases_portee) {
         			j++;
         		}
         	}
-        	res[j]=null;	
+        	if (j<2) {
+        		res[j]=null;
+        	}
         	return res;
         }
         
@@ -263,21 +266,27 @@ public void setCases_portee(int[][]cases_portee) {
         	int taille=0;
          	for(int i=0;i<5;i++)
          	{   
-         		taille+=bateaux[i].cases_portee().length;
+         		if(bateaux[i]!=null) {
+         			taille+=bateaux[i].cases_portee().length;
+         		}	
          	}
          	int k=0;      	
          	int[][]cases = new int[taille][2];
+         	//System.out.println(bateaux[0].cases_portee()[0][0]);
+         	//System.out.println(bateaux[0].cases_portee()[0][1]);
          	
          	for(int i=0;i<5;i++) {
-         		for(int j=0;j<bateaux[i].cases_portee().length;j++) {
-         			if(bateaux[i].cases_portee()[j]==null)k++;
-         			else
-         			{
-         				cases[k][0]=bateaux[i].cases_portee()[j][0];
-         				cases[k][1]=bateaux[i].cases_portee()[j][1];
-         				k++;      			
-	         		}
-	         	}
+         		if(bateaux[i]!=null) {
+	         		for(int j=0;j<bateaux[i].cases_portee().length;j++) {
+	         			if(bateaux[i].cases_portee()[j]==null)k++;
+	         			else
+	         			{
+	         				cases[k][0]=bateaux[i].cases_portee()[j][0];
+	         				cases[k][1]=bateaux[i].cases_portee()[j][1];
+	         				k++;      			
+		         		}
+		         	}
+         		}
          	}
         return cases;    
          	}
