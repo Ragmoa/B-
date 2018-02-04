@@ -30,7 +30,6 @@ public class Boat {
       return horizontal;
     }
     public void hit(int c){
-    	System.out.println("coucous");
       if (c<0 && c>taille){
         return;
       } else{
