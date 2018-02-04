@@ -28,9 +28,10 @@ public class Jeu{
 	private Joueur j1;
 	private Joueur j2;
 	private Joueur j_actuel;
+	int statut; //0=En attente, 1=tir reussi, 2=tir rate, 3=changement de tour
 	private Label texteStatut = new Label(); //ratï¿½, rï¿½ussi, etc
 	private Label texteJoueurAct = new Label();
-	private int etapeJeu;//0=placement de bateau, 1=tir, 2=deplacement de bateau
+	private int etapeJeu;//0=placement de bateau, 1=tir, 2=attente apres tir, 3=deplacement de bateau
 	private Label texteEtapeJeu = new Label(); ;
 	private Scene sceneMenu;
 	
@@ -40,6 +41,7 @@ public class Jeu{
 		this.j1=j1;
 		this.j2=j2;
 		this.etapeJeu=0;
+		this.statut=0;
         this.sceneMenu = sceneMenu;
 	}
 	
@@ -131,10 +133,34 @@ public class Jeu{
 			break;
 		case 1 : //tir
 			if(playerSide==false) {
-				panel.majPanel(colonne, ligne, Content.hit);	
+				int reponse;
+				if(j_actuel.getPseudo().equals(j1.getPseudo())) {
+					reponse=j2.tir_ennemi(colonne, ligne);
+					System.out.println("tir sur" + j2.getPseudo() + " : " +reponse);
+				}
+				else {
+					reponse=j1.tir_ennemi(colonne, ligne);
+					System.out.println("tir sur" + j1.getPseudo() + " : " +reponse);
+				}
+				//gestion des touchés/ratés
+				if(reponse==0) {
+					panel.majPanel(colonne, ligne, Content.miss);
+					this.statut=2;
+				}
+				else {
+					panel.majPanel(colonne, ligne, Content.hit);
+					this.statut=1;
+				}
+				this.etapeJeu=2;					
 			}
 			break;
-		case 2 : //deplacement d'un bateau
+		case 2 : //attente apres tir
+			this.etapeJeu=1;
+			this.statut=0;
+			changeTour();
+			break;
+		case 3 : //deplacement d'un bateau
+			this.etapeJeu=1;
 			break;
 		default :
 			break;
@@ -163,11 +189,11 @@ public class Jeu{
         texteJoueurAct.setText(j_actuel.getPseudo());
         
         texteEtapeJeu.setId("etapeJeu");
-        texteEtapeJeu.setText("Placez vos bateaux");
+        texteEtapeJeu.setText(" | Placez vos bateaux");
         texteEtapeJeu.setTextFill(Color.WHITE);
         
         texteStatut.setId("statut");
-        texteStatut.setText("statut");
+        texteStatut.setText(" | En attente...");
         texteStatut.setTextFill(Color.WHITE);
         
 	    hbox.getChildren().addAll(texteJoueurAct);
@@ -179,23 +205,45 @@ public class Jeu{
 	
 	public void majHbox() {
 		switch(this.getEtapeJeu()) {
-		case 0 : //placement bateau dï¿½but partie
-			texteEtapeJeu.setText("Placez vos bateaux");
+		case 0 : //placement bateau debut partie
+			texteEtapeJeu.setText(" | Placez vos bateaux");
 			break;
 		case 1 : //tir
-			texteEtapeJeu.setText("Choisissez votre cible");
+			texteEtapeJeu.setText(" | Choisissez votre cible");
 			break;
-		case 2 : //deplacement d'un bateau
-			texteEtapeJeu.setText("Deplacez un bateau");
+		case 2 : //attente apres tir
+			texteEtapeJeu.setText(" | Cliquez sur une case pour finir votre tour");
+			break;
+		case 3 : //deplacement d'un bateau
+			texteEtapeJeu.setText(" | Deplacez un bateau");
 			break;
 		default :
 			break;
 		}
 		
+		switch(this.getStatut()) {
+		case 0 : //En attente
+			texteStatut.setText(" | En attente...");
+			break;
+		case 1 : 
+			texteStatut.setText(" | Tir réussi !");
+			break;
+		case 2 :
+			texteStatut.setText(" | Tir raté...");
+			break;
+		case 3 :
+			texteStatut.setText(" | Changement de joueur");
+			break;
+			
+		}
 		texteJoueurAct.setText(j_actuel.getPseudo());	
 	}
 	
 	public int getEtapeJeu() {
 		return this.etapeJeu;
+	}
+	
+	public int getStatut() {
+		return this.statut;
 	}
 }
