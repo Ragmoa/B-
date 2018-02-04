@@ -244,7 +244,7 @@ public class Joueur {
         			System.out.println(i);
         			System.out.println(this.bateaux[number].is_hit(i));
         			res[j][0]=this.bateaux[number].cases_ocupees()[i][0];
-        			res[j][0]=this.bateaux[number].cases_ocupees()[i][1];
+        			res[j][1]=this.bateaux[number].cases_ocupees()[i][1];
         			j++;
         		}
         	}
