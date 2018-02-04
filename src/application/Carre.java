@@ -26,13 +26,11 @@ public class Carre extends Parent{
     private Boolean playerSide; //1=appartient au plateau avec les bateaux du joueur, 0=appartient au plateau avec les tirs vers l'adversaire
     int ligne;
     int colonne;
-    int form;
     
     public Carre(Boolean player, Content contenu, int colonne, int ligne){
     	this.playerSide=player;
     	this.ligne=ligne;
     	this.colonne=colonne;
-    	this.form=1;
     	
         Rectangle fondCarre = new Rectangle(0,0,50,50);
         getChildren().add(fondCarre);     
@@ -45,26 +43,18 @@ public class Carre extends Parent{
 		fondCarre.setFill(Color.LIGHTBLUE);
 		fondCarre.setStroke(Color.BLACK);
 		
-//		for(int i=0; i<this.getForm(); i++)
-//		{
-//			System.out.println(i);
-//			this.getChildren().remove(i);
-//		}
 		this.getChildren().removeAll();
       
 		switch(contenu) {
  		case boat:
  			fondCarre.setFill(Color.WHITE);
- 			setForm(1);
  			this.getChildren().add(fondCarre); 
  			break;
  		case boat_hit:
  			fondCarre.setFill(Color.GREY);
- 			setForm(1);
  			this.getChildren().add(fondCarre); 
  			break;
  		case boat_range:
- 			setForm(1);
  			fondCarre.setStroke(Color.RED);
  			this.setOnMouseEntered(new EventHandler<MouseEvent>(){
  	            public void handle(MouseEvent me){
@@ -82,18 +72,20 @@ public class Carre extends Parent{
  	        this.getChildren().add(fondCarre); 
  			break;
  		case hit:
- 			this.setForm(2);
- 			Circle line1 = new Circle(25, 25, 15);
- 		    line1.setStroke(Color.BLACK);	
+ 			Line line1 = new Line(5, 5, 45, 45);
+ 		    line1.setStroke(Color.BLACK);
+	    	Line line2 = new Line(45, 5, 5, 45);
+		    line2.setStroke(Color.BLACK);
  		    this.getChildren().add(fondCarre); 
  		    this.getChildren().add(line1);
+ 		    this.getChildren().add(line2);
  			break;
  		case miss:
+ 			Circle circle1 = new Circle(25, 25, 20);
  			this.getChildren().add(fondCarre); 
- 			setForm(1);
+ 			this.getChildren().add(circle1); 
  			break;
  		case sea:
- 			setForm(1);
  			fondCarre.setFill(Color.LIGHTBLUE);
  			this.setOnMouseEntered(new EventHandler<MouseEvent>(){
  	            public void handle(MouseEvent me){
@@ -128,14 +120,6 @@ public class Carre extends Parent{
     public Boolean getPlayerSide() {
     	return playerSide;
     }    
-    
-    public int getForm() {
-    	return this.form;
-    }
-    
-    public void setForm(int form) {
-    	this.form=form;
-    }
 }   
     
 

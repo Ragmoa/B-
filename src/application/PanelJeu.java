@@ -39,7 +39,7 @@ public class PanelJeu extends Parent {
             }
             liste.add(ligne);
         }
-        grid.setPadding(new Insets(10,0,0,5));//haut,droit,bas,gauche
+        grid.setPadding(new Insets(10,0,10,5));//haut,droit,bas,gauche
         return grid;
     }
     

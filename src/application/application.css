@@ -71,3 +71,11 @@
 	-fx-text-fill: #FFFFFF;
 	-fx-effect: dropshadow(three-pass-box, #16BEEB, 10, 0.5, 0, 0);
 }
+#infoPartie {
+	-fx-padding: 10;
+	-fx-border-style: solid inside;
+	-fx-border-width: 1;
+	-fx-border-insets: 8 5 0 10;
+	-fx-border-radius: 10;
+	-fx-border-color: white;
+}
