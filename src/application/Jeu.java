@@ -5,10 +5,12 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import modele.Content;
 import modele.Joueur;
 
 //Gestion du jeu
@@ -65,15 +67,19 @@ public class Jeu{
                 if( node instanceof Parent) {
                     if( node.getBoundsInParent().contains(event.getSceneX(),  event.getSceneY())) {
                         //System.out.println( "Carre " + GridPane.getColumnIndex( node) + "/" + GridPane.getRowIndex( node));
-                        clic(GridPane.getColumnIndex( node), GridPane.getRowIndex( node), true);
+                        clic(panelJoueur1, GridPane.getColumnIndex( node), GridPane.getRowIndex( node), true);
                     }
                 }
+            }
+        	if (event.getButton() == MouseButton.SECONDARY) {
+               panelJoueur1.resetPanel();
             }
         });
         
 	}
 	
-	public void clic(int colonne, int ligne, boolean playerSide) {
+	public void clic(PanelJeu panel, int colonne, int ligne, boolean playerSide) {
 		System.out.println("case " + colonne + " " + ligne);
+		panel.majPanel(colonne, ligne, Content.hit);
 	}
 }
