@@ -237,7 +237,7 @@ public class Jeu{
 			    	panel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
 			    } 
 				//On place les cases bateau touche
-				majBoatHit(autrePanel);
+				majBoatHit(panel);
 				//On met à jour la portée
 				autrePanel.resetPanel();
 				majHitMissRange(autrePanel, panel);
@@ -292,6 +292,7 @@ public class Jeu{
 	
 	//A appeler uniquement avec le panel de gauche
 	public void majBoatHit(PanelJeu panel) {
+		System.out.println("hey");
 		int[][] caseTouchee;
 		for(int i=0; i<5; i++) {
 			caseTouchee=j_actuel.cases_touchees(i);
