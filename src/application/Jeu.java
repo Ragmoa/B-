@@ -122,8 +122,7 @@ public class Jeu{
         });
 	}
 	
-	public void clic(PanelJeu panel, int colonne, int ligne, boolean playerSide, PanelJeu autrePanel) {
-		System.out.println("case " + colonne + " " + ligne);		
+	public void clic(PanelJeu panel, int colonne, int ligne, boolean playerSide, PanelJeu autrePanel) {	
 		switch(this.getEtapeJeu()) {
 		case 0 : //placement bateau dï¿½but partie
 			if(playerSide==true){
@@ -167,11 +166,9 @@ public class Jeu{
 				if(valid) {
 					if(j_actuel.getPseudo().equals(j1.getPseudo())) {
 						reponse=j2.tir_ennemi(colonne, ligne);
-						System.out.println("tir sur" + j2.getPseudo() + " : " +reponse);
 					}
 					else {
 						reponse=j1.tir_ennemi(colonne, ligne);
-						System.out.println("tir sur" + j1.getPseudo() + " : " +reponse);
 					}
 					//gestion des touches/rate
 					//TODO verifier la range
@@ -333,7 +330,6 @@ public class Jeu{
 	
 	//A appeler uniquement avec le panel de gauche
 	public void majBoatHit(PanelJeu panel) {
-		System.out.println("hey");
 		int[][] caseTouchee;
 		for(int i=0; i<5; i++) {
 			caseTouchee=j_actuel.cases_touchees(i);
@@ -445,7 +441,7 @@ public class Jeu{
 			texteStatut.setText(" | Changement de joueur");
 			break;
 		case 5 :
-			texteStatut.setText(" | Clic droit pour annuler\n | la sï¿½lection");
+			texteStatut.setText(" | Clic droit pour annuler\n | la sélection");
 			break;
 		case 6 :
 			texteStatut.setText(" | Bateau vertical");

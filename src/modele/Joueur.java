@@ -19,7 +19,6 @@ public class Joueur {
   
  
   public Joueur(String pseudo, boolean ia) {
-	  System.out.println("new player");
     int i,j=0;
 	this.pseudo = pseudo; 
     this.ia = ia;
@@ -166,7 +165,6 @@ public void setCases_portee(int[][]cases_portee) {
     		   else if(i==2)b=new Boat(3,2,horizontal,pos);
     		   else if(i==3)b=new Boat(3,4,horizontal,pos);
     		   else if(i==4)b=new Boat(2,5,horizontal,pos);
-    		   System.out.println(pos[0]+" "+pos[1] + " " + i);
     		   
     		   if(i!=0 && !check_collision(b) && ((b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ) )){
     			   //System.out.println(x+" "+y + " " + i);
