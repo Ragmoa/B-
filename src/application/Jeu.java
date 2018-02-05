@@ -155,7 +155,7 @@ public class Jeu{
 				int reponse;
 				boolean valid=false;
 				for(int i=0;i<j_actuel.get_player_range().length;i++) { 
-					if(colonne==j_actuel.get_player_range()[i][0] && ligne==j_actuel.get_player_range()[i][1]) {
+					if(j_actuel.get_player_range()[i]!=null && colonne==j_actuel.get_player_range()[i][0] && ligne==j_actuel.get_player_range()[i][1]) {
 						valid=true;						 
 					}
 			    }
