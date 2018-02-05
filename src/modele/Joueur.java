@@ -156,16 +156,15 @@ public void setCases_portee(int[][]cases_portee) {
 		   pos[1]=y;
 		   
     		   if(i==0 && ((b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ))){	   
-    			   bateaux[0]=new Boat(5,2,horizontal,pos);
-    			   System.out.println(x+" "+y + " " + i);
+    			   bateaux[0]=new Boat(5,2,horizontal,pos);   
     		   }
     		   else if(i==1)b=new Boat(4,2,horizontal,pos);
     		   else if(i==2)b=new Boat(3,2,horizontal,pos);
     		   else if(i==3)b=new Boat(3,4,horizontal,pos);
     		   else if(i==4)b=new Boat(2,5,horizontal,pos);
+    		   System.out.println(pos[0]+" "+pos[1] + " " + i);
     		   
-    		   if(i!=0 && !check_collision(b) && ((b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ) )){
-    			   System.out.println(x+" "+y + " " + i);
+    		   if(i!=0 && check_collision(b) && ((b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ) )){
     			   if(i==1)bateaux[1]=new Boat(4,2,horizontal,pos);
     			   else if(i==2)bateaux[2]=new Boat(3,2,horizontal,pos);
     			   else if(i==3)bateaux[3]=new Boat(3,4,horizontal,pos);
