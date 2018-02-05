@@ -213,7 +213,10 @@ public class Jeu{
 		case 3 : //attente avant de changer de joueur
 			if(playerSide==false) {
 				this.statut=0;
-				majHitMissRange(panel, autrePanel);
+				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
+			        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
+		        }
+				majHitMissRange(panel);
 				//On place les cases bateau touche
 				majBoatHit(autrePanel);
 				if(!j_actuel.get_peut_bouger()) {
@@ -254,7 +257,7 @@ public class Jeu{
 				//majBoatHit(panel); // Ne marche pas... bizarre
 				//On met � jour la port�e
 				autrePanel.resetPanel();
-				majHitMissRange(autrePanel, panel);
+				majHitMissRange(autrePanel);
 				this.statut=0;
 				this.etapeJeu=1;
 			}
@@ -331,7 +334,7 @@ public class Jeu{
 	}
 	
 	//A appeler uniquement avec le panel de droite en premier
-	public void majHitMissRange(PanelJeu panel, PanelJeu autrePanel) {
+	public void majHitMissRange(PanelJeu panel) {
 		//On replace les hit/miss pour la suite
 		int tableauDroite[][]=j_actuel.get_status();
 		for(int i=0; i<10; i++) {
@@ -345,9 +348,6 @@ public class Jeu{
 			}
 		}
 		//On place la range
-		for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
-	        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
-        }
 		for(int i=0;i<j_actuel.get_player_range().length;i++) {  
 		 	if (j_actuel.get_player_range()[i]!=null) {
 				if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==-1) {	 
