@@ -233,11 +233,20 @@ public class Jeu{
 					panel.majPanel(bateauTemp.cases_ocupees()[i][0], bateauTemp.cases_ocupees()[i][1], Content.sea);
 				}
 				j_actuel.bouger(this.bateauTemp, colonne, ligne);
-				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
-			    	panel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
-			    }
+				for(int i=0;i<bateauTemp.get_taille();i++) { 
+					if (this.bateauTemp.is_hit(i)) {
+						System.out.println("Coucou");
+						panel.majPanel(bateauTemp.cases_ocupees()[i][0], bateauTemp.cases_ocupees()[i][1], Content.boat_hit);
+						System.out.print(bateauTemp.cases_ocupees()[i][0]);
+						System.out.print(" , ");
+						System.out.println(bateauTemp.cases_ocupees()[i][1]);
+					} else {
+						panel.majPanel(bateauTemp.cases_ocupees()[i][0], bateauTemp.cases_ocupees()[i][1], Content.boat);
+						System.out.println("Coucou2");
+					}
+			    } 
 				//On place les cases bateau touche
-				majBoatHit(panel);
+				//majBoatHit(panel);
 				//On met à jour la portée
 				autrePanel.resetPanel();
 				majHitMissRange(autrePanel, panel);
