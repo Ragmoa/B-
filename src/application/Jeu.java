@@ -318,7 +318,12 @@ public class Jeu{
 					}while(this.bateauTemp==null);
 					j2.bouger_ia(this.bateauTemp);
 				}
-				
+				do {
+					this.bateauTemp=j2.select_bateau();			
+				}while(this.bateauTemp==null);
+				int [] tr = new int[2];
+				tr= j2.tir_ia(bateauTemp);
+				j1.tir_ennemi(tr[0], tr[1]);
 		}
 		}
 			

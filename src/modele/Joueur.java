@@ -181,29 +181,16 @@ public void setCases_portee(int[][]cases_portee) {
 	   }while(i<5);	   
    }
    
-   public int tir_ia() {
-   	int i=0,j=0;
-   	int x=0, y=0;
-   	Random r = new Random();
-	   x = 0 + r.nextInt(9 - 0);
-	   y = 0 + r.nextInt(9 - 0);
-   	for (i=0;i<5;i++) {
-   		if (this.bateaux[i]!=null) {
-   			for (j=0;j<this.bateaux[i].get_taille();j++) {
-   				if ( x==this.bateaux[i].cases_ocupees()[j][0] && y==this.bateaux[i].cases_ocupees()[j][1] ) {
-   					this.bateaux[i].hit(j);
-   					this.peut_bouger=false;
-   					if (this.bateaux[i].doit_couler()) {
-   						this.bateaux[i]=null;
-   						return 2;//COULÉ!
-   					} else {
-   						return 1; //TOUCHÉ!
-   					}
-   				}
-   		}
-   	}
-   	}
-   	return 0; // DANS L'EAU!
+   public int[] tir_ia(Boat b) {
+	   int[]res=new int[2];
+	   int r;
+	   Random rd= new Random();
+	   do {
+		   r=0+rd.nextInt(b.cases_portee().length- 0);
+	   }while (b.cases_portee()[r]==null);
+	   res[0]=b.cases_portee()[r][0];
+	   res[1]=b.cases_portee()[r][1];
+	   return res;
    }
    public Boat select_bateau() {//TODO: D�placer dans Joueur_humain 
        int i=0, j=0;
