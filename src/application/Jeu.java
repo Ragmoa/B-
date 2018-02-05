@@ -137,12 +137,20 @@ public class Jeu{
 				if(j_actuel.getBateauplace()==5) {
 					panel.resetPanel();
 					autrePanel.resetPanel();
-					if(!j2.isIa())changeTour();
-					if(j_actuel.getPseudo().equals(j2.getPseudo()) || j2.isIa()) {
+					if(!j2.isIa()){
+						if(j_actuel.getPseudo().equals(j2.getPseudo()) || j2.isIa()) {
+							this.etapeJeu=3;
+							this.statut=0;
+						}	
+						changeTour();
+					}
+					else {
+						changeTour();
 						this.etapeJeu=3;
 						this.statut=0;
-					}	
-					changeTour();
+					}
+						
+					
 					
 				}
 			}
