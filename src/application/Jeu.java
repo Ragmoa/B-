@@ -227,16 +227,17 @@ public class Jeu{
 			        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
 		        }
 				for(int i=0;i<j_actuel.get_player_range().length;i++) {  
-					 	if (j_actuel.get_player_range()[i]!=null) {
-					if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==-1) {	 
-						panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_miss);
-					}
-					else if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==1) {	 
-						panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_hit);
-					}
-				else{
-panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range); 
-} 
+				 	if (j_actuel.get_player_range()[i]!=null) {
+						if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==-1) {	 
+							panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_miss);
+						}
+						else if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==1) {	 
+							panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_hit);
+						}
+						else{
+							panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range); 
+						} 
+				 	}
 				}
 				//Et les cases touchees
 				int[][] caseTouchee;
@@ -269,7 +270,7 @@ panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i]
 			break;
 		case 5 : //deplacement d'un bateau - choix du mouvement
 			System.out.println("5");
-			if(playerSide==true && j_actuel.check_collision(this.bateauTemp, colonne, ligne)) {
+			if(playerSide==true) {
 				j_actuel.bouger(this.bateauTemp, colonne, ligne);
 				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
 			    	panel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
