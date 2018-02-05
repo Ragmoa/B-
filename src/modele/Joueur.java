@@ -225,8 +225,8 @@ public void setCases_portee(int[][]cases_portee) {
 	   int x=0, y=0;
 	   int pos[] = {x,y};
        Random r = new Random();      
-	   x = 0 + r.nextInt(9 - 0);
-	   y = 0 + r.nextInt(9 - 0);      
+	   x = -2 + r.nextInt(4 - 0);
+	   y =  if(Math.abs(x))+ r.nextInt(9 - 0);      
        b.set_position(pos); 
        return ; 
      }
