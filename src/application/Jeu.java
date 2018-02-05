@@ -225,9 +225,10 @@ public class Jeu{
 						panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_hit);
 					}
 				else{
-panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range); 
-} 
+					panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range); 
+					}
 				}
+			}
 				//Et les cases touchees
 				int[][] caseTouchee;
 				for(int i=0; i<5; i++) {
