@@ -1,4 +1,4 @@
-  package application;
+ package application;
 
 
 import javafx.geometry.Insets;
@@ -28,14 +28,16 @@ public class Jeu{
 	private Joueur j1;
 	private Joueur j2;
 	private Joueur j_actuel;
-	int statut; //0=En attente, 1=tir reussi, 2=tir rate, 3=changement de tour
-	private Label texteStatut = new Label(); //ratï¿½, rï¿½ussi, etc
+	int statut; //0=En attente, 1=tir reussi, 2=bateau coule, 3=tir rate, 4=changement de tour
+	private Label texteStatut = new Label(); //rate, touche, coule...
 	private Label texteJoueurAct = new Label();
 	private int etapeJeu;//0=placement de bateau, 1=tir, 2=attente apres tir, 3=deplacement de bateau
 	private Label texteEtapeJeu = new Label(); ;
 	private Scene sceneMenu;
 	private PanelVictoire panelVictoire;
 	private Stage primaryStage;
+	private Boat bateauTemp;
+	private boolean touche; //true=joueur precedent a touche
 	
 	public Jeu(Joueur j1, Joueur j2, Scene sceneMenu)
 	{		
@@ -131,7 +133,6 @@ public class Jeu{
 		switch(this.getEtapeJeu()) {
 		case 0 : //placement bateau dï¿½but partie
 			if(playerSide==true){
-				panel.majPanel(colonne, ligne, Content.boat_range);
 				j_actuel.setBateauplace(j_actuel.placer_bateau(colonne, ligne, j_actuel.getBateauplace(),j_actuel.get_horizontal()));
 				j_actuel.setCases_joueur(j_actuel.get_player_boat()); 
 			       
@@ -154,7 +155,7 @@ public class Jeu{
 				int reponse;
 				boolean valid=false;
 				for(int i=0;i<j_actuel.get_player_range().length;i++) { 
-					if(colonne==j_actuel.get_player_range()[i][0] && ligne==j_actuel.get_player_range()[i][1]) {
+					if(j_actuel.get_player_range()[i]!=null && colonne==j_actuel.get_player_range()[i][0] && ligne==j_actuel.get_player_range()[i][1]) {
 						valid=true;						 
 					}
 			    }
@@ -172,13 +173,21 @@ public class Jeu{
 					if(reponse==0) {
 						panel.majPanel(colonne, ligne, Content.miss);
 						j_actuel.set_status(colonne, ligne, -1);
-						this.statut=2;
+						this.statut=3;
+						this.touche=false;
+					}
+					else if(reponse==1){
+						panel.majPanel(colonne, ligne, Content.hit);
+						j_actuel.set_status(colonne, ligne, 1);
+						this.statut=1;
+						this.touche=true;
 					}
 					else {
 						panel.majPanel(colonne, ligne, Content.hit);
 						j_actuel.set_status(colonne, ligne, 1);
-						this.statut=1;
-					}				
+						this.statut=2;
+						this.touche=true;
+					}
 					//Condition de victoire
 					if(j1.a_perdu() || j2.a_perdu()) {
 						this.etapeJeu=0;
@@ -201,13 +210,8 @@ public class Jeu{
 			break;
 		case 3 : //attente avant de changer de joueur
 			if(playerSide==false) {
-				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
-			        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
-		        }
-				 for(int i=0;i<j_actuel.get_player_range().length;i++) { 
-			          //System.out.println(j_actuel.getCases_portee()[i][0] + " " + j_actuel.getCases_portee()[i][1]); 
-			              panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range);  
-			              } 
+				majHitMissRange(panel, autrePanel);
+				//On place les cases bateau touche
 				int[][] caseTouchee;
 				for(int i=0; i<5; i++) {
 					caseTouchee=j_actuel.cases_touchees(i);
@@ -219,24 +223,39 @@ public class Jeu{
 					}
 					caseTouchee=null;
 				}
-				//On replace les hit/miss pour la suite
-				int tableauDroite[][]=j_actuel.get_status();
-				for(int i=0; i<10; i++) {
-					for(int j=0; j<10; j++) {
-						if(tableauDroite[i][j]==-1) {
-							panel.majPanel(i, j, Content.miss);
-						}
-						else if(tableauDroite[i][j]==1) {
-							panel.majPanel(i, j, Content.hit);
-						}
-					}
+				if(this.touche) {
+					this.etapeJeu=1;
 				}
-				this.etapeJeu=1;
+				else {
+					this.etapeJeu=4;
+				}
+				
 			}
 			break;
-		case 4 : //deplacement d'un bateau
-			
-			this.etapeJeu=1;
+		case 4 : //deplacement d'un bateau - choix du bateau
+			if(playerSide==true) {
+				if(j_actuel.select_bateau(colonne, ligne)!=null) {
+					this.bateauTemp=j_actuel.select_bateau(colonne, ligne);
+					this.etapeJeu=5;
+				}
+			}
+			break;
+		case 5 : //deplacement d'un bateau - choix du mouvement
+			if(playerSide==true && !j_actuel.check_collision(this.bateauTemp, colonne, ligne) 
+				&& ((this.bateauTemp.get_taille()+colonne <= 10 && this.bateauTemp.is_horizontal()) || 
+				(bateauTemp.get_taille()+ligne <= 10 && !bateauTemp.is_horizontal()) ) &&
+				Math.abs(bateauTemp.get_position()[0]-colonne)+Math.abs(bateauTemp.get_position()[1]-ligne) <= 2) {
+				for(int i=0; i<bateauTemp.cases_ocupees().length; i++) {
+					panel.majPanel(bateauTemp.cases_ocupees()[i][0], bateauTemp.cases_ocupees()[i][1], Content.sea);
+				}
+				j_actuel.bouger(this.bateauTemp, colonne, ligne);
+				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
+			    	panel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
+			    } 
+				autrePanel.resetPanel();
+				majHitMissRange(autrePanel, panel);
+				this.etapeJeu=1;
+			}
 			break;
 		default :
 			break;
@@ -245,8 +264,7 @@ public class Jeu{
 	
 	public void clicDroit(PanelJeu panel, int colonne, int ligne, boolean playerSide, PanelJeu autrePanel) {
 		switch(this.getEtapeJeu()) {
-		case 0:
-			if(j_actuel.get_horizontal()==true)j_actuel.set_horizontal(false);
+		case 0:if(j_actuel.get_horizontal()==true)j_actuel.set_horizontal(false);
 			
 			else j_actuel.set_horizontal(true);
 			this.etapeJeu=0;
@@ -261,6 +279,8 @@ public class Jeu{
 			break;
 		default :
 			break;
+		case 5 :
+			break;
 		}
 	}
 	
@@ -271,6 +291,39 @@ public class Jeu{
 		}
 		else {
 			j_actuel=j1;
+		}
+	}
+	
+	//A appeler uniquement avec le panel
+	public void majHitMissRange(PanelJeu panel, PanelJeu autrePanel) {
+		//On replace les hit/miss pour la suite
+		int tableauDroite[][]=j_actuel.get_status();
+		for(int i=0; i<10; i++) {
+			for(int j=0; j<10; j++) {
+				if(tableauDroite[i][j]==-1) {
+					panel.majPanel(i, j, Content.miss);
+				}
+				else if(tableauDroite[i][j]==1) {
+					panel.majPanel(i, j, Content.hit);
+				}
+			}
+		}
+		//On place la range
+		for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
+	        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
+        }
+		for(int i=0;i<j_actuel.get_player_range().length;i++) {  
+		 	if (j_actuel.get_player_range()[i]!=null) {
+				if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==-1) {	 
+					panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_miss);
+				}
+				else if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==1) {	 
+					panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_hit);
+				}
+				else{
+					panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range); 
+				} 
+		 	}
 		}
 	}
 	
@@ -288,10 +341,12 @@ public class Jeu{
         texteEtapeJeu.setId("etapeJeu");
         texteEtapeJeu.setText(" | Placez vos bateaux");
         texteEtapeJeu.setTextFill(Color.WHITE);
+        texteStatut.setPadding(new Insets(0, 0, 0, 20)); //haut,droit,bas,gauche
         
         texteStatut.setId("statut");
         texteStatut.setText(" | En attente...");
         texteStatut.setTextFill(Color.WHITE);
+        texteStatut.setPadding(new Insets(0, 0, 0, 40)); //haut,droit,bas,gauche
         
 	    hbox.getChildren().addAll(texteJoueurAct);
 	    hbox.getChildren().addAll(texteEtapeJeu);
@@ -309,14 +364,16 @@ public class Jeu{
 			texteEtapeJeu.setText(" | Choisissez votre cible");
 			break;
 		case 2 : //attente apres tir
-			texteEtapeJeu.setText(" | Cliquez sur une case \n droite pour finir le tour");
+			texteEtapeJeu.setText(" | Cliquez sur une case a \n | droite pour finir le tour");
 			break;
 		case 3 : //attente avant de changer de joueur
-			texteEtapeJeu.setText(" | Cliquez sur une case \n droite pour commencer");
+			texteEtapeJeu.setText(" | Cliquez sur une case a \n | droite pour commencer");
 			break;
-		case 4 : //deplacement d'un bateau
-			texteEtapeJeu.setText(" | Deplacez un bateau");
+		case 4 : //choix d'un bateau
+			texteEtapeJeu.setText(" | Choisissez un bateau a \n | déplacer");
 			break;
+		case 5 : //choix du mouvement
+			texteEtapeJeu.setText(" | Choisissez sa position");
 		default :
 			break;
 		}
@@ -326,15 +383,17 @@ public class Jeu{
 			texteStatut.setText(" | En attente...");
 			break;
 		case 1 : 
-			texteStatut.setText(" | Tir rï¿½ussi !");
+			texteStatut.setText(" | Tir reussi !");
 			break;
-		case 2 :
-			texteStatut.setText(" | Tir ratï¿½...");
+		case 2 : 
+			texteStatut.setText(" | Bateau coule !");
 			break;
 		case 3 :
-			texteStatut.setText(" | Changement de joueur");
+			texteStatut.setText(" | Tir rate...");
 			break;
-			
+		case 4 :
+			texteStatut.setText(" | Changement de joueur");
+			break;		
 		}
 		texteJoueurAct.setText(j_actuel.getPseudo());	
 	}
