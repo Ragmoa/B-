@@ -15,7 +15,7 @@ public class PanelMenuPrincipal {
 	private GridPane gridMenu;
 	private MenuPrincipal menu;
     
-	private Jeu mainOthello;
+	private Jeu mainJeu;
     
 	private Scene scene;
 
@@ -40,7 +40,7 @@ public class PanelMenuPrincipal {
 		gridMenu.setAlignment(Pos.CENTER);
 		gridMenu.setId("pane");
 		
-		scene = new Scene(gridMenu, 1000, 700);
+		scene = new Scene(gridMenu, 1040, 650);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		
 		//LIGNE 0 : TITRE
@@ -124,9 +124,9 @@ public class PanelMenuPrincipal {
 		jouer.setId("jouer");
 		jouer.setPrefWidth(174);
 		jouer.setOnMouseClicked((event) -> {
-			//LANCEMENT OTHELLO
-			mainOthello = new Jeu(menu.getJ1(), menu.getJ2(), scene);
-			mainOthello.jouer(primaryStage);
+			//LANCEMENT JEU
+			mainJeu = new Jeu(menu.getJ1(), menu.getJ2(), scene);
+			mainJeu.jouer(primaryStage);
 		});
 		gridMenu.add(jouer, 2, 7);
 		
