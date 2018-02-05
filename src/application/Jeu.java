@@ -243,14 +243,14 @@ public class Jeu{
 		case 5 : //deplacement d'un bateau - choix du mouvement
 			if(playerSide==true && !j_actuel.check_collision(this.bateauTemp, colonne, ligne) 
 				&& ((this.bateauTemp.get_taille()+colonne <= 10 && this.bateauTemp.is_horizontal()) || 
-				(bateauTemp.get_taille()+ligne <= 10 && !bateauTemp.is_horizontal()) )) {
+				(bateauTemp.get_taille()+ligne <= 10 && !bateauTemp.is_horizontal()) ) &&
+				Math.abs(bateauTemp.get_position()[0]-colonne)+Math.abs(bateauTemp.get_position()[1]-ligne) <= 2) {
 				for(int i=0; i<bateauTemp.cases_ocupees().length; i++) {
 					panel.majPanel(bateauTemp.cases_ocupees()[i][0], bateauTemp.cases_ocupees()[i][1], Content.sea);
 				}
 				j_actuel.bouger(this.bateauTemp, colonne, ligne);
 				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
 			    	panel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
-			    	
 			    } 
 				autrePanel.resetPanel();
 				majHitMissRange(autrePanel, panel);
@@ -390,8 +390,7 @@ public class Jeu{
 			break;
 		case 4 :
 			texteStatut.setText(" | Changement de joueur");
-			break;
-			
+			break;		
 		}
 		texteJoueurAct.setText(j_actuel.getPseudo());	
 	}
