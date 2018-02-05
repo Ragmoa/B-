@@ -142,11 +142,14 @@ public class Jeu{
 			    } 
 				if(j_actuel.getBateauplace()==5) {
 					panel.resetPanel();
-					autrePanel.resetPanel();		
-					if(j_actuel.getPseudo().equals(j2.getPseudo())) {
+					autrePanel.resetPanel();
+					if(!j2.isIa())changeTour();
+					if(j_actuel.getPseudo().equals(j2.getPseudo()) || j2.isIa()) {
 						this.etapeJeu=3;
-					}	
+					}
+					else
 					changeTour();
+					
 				}
 			}
 			break;
@@ -286,12 +289,22 @@ public class Jeu{
 	
 	public void changeTour()
 	{
-		if(j_actuel.getPseudo().equals(j1.getPseudo())) {
-			j_actuel=j2;
+		if(!j2.isIa()) {
+			if(j_actuel.getPseudo().equals(j1.getPseudo())) {
+				j_actuel=j2;
+			}
+			else {
+				j_actuel=j1;
+			}
 		}
-		else {
-			j_actuel=j1;
+		else
+		{
+			if(this.etapeJeu==0)
+				j2.placer_bateau_ia();
 		}
+			
+		
+		
 	}
 	
 	//A appeler uniquement avec le panel

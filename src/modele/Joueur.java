@@ -1,5 +1,7 @@
 package modele; 
  
+import java.util.Random;
+
 import application.Boat; 
  
 public class Joueur { 
@@ -142,6 +144,86 @@ public void setCases_portee(int[][]cases_portee) {
     		   
     		   return i;
     		 }
+   public void placer_bateau_ia() {
+	   int i=0, x=0, y=0;
+	   int pos[] = {x,y};
+	   Boat b = new Boat(5,2,horizontal,pos);
+	   do {
+		   Random r = new Random();
+		   x = 0 + r.nextInt(9 - 0);
+		   y = 0 + r.nextInt(9 - 0);
+    		   if(i==0 && ((b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ))){	   
+    			   bateaux[0]=new Boat(5,2,horizontal,pos);
+    			   i++;
+    		   }
+    		   else if(i==1)b=new Boat(4,2,horizontal,pos);
+    		   else if(i==2)b=new Boat(3,2,horizontal,pos);
+    		   else if(i==3)b=new Boat(3,4,horizontal,pos);
+    		   else if(i==4)b=new Boat(2,5,horizontal,pos);
+    		   
+    		   if(i!=0 && !check_collision(b) && ((b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ) )){
+    			   
+    			   if(i==1)bateaux[1]=new Boat(4,2,horizontal,pos);
+    			   else if(i==2)bateaux[2]=new Boat(3,2,horizontal,pos);
+    			   else if(i==3)bateaux[3]=new Boat(3,4,horizontal,pos);
+    			   else if(i==4)bateaux[4]=new Boat(2,5,horizontal,pos);
+    			   i++;
+    		   }
+	   }while(i<5);	   
+   }
+   
+   public int tir_ia() {
+   	int i=0,j=0;
+   	int x=0, y=0;
+   	Random r = new Random();
+	   x = 0 + r.nextInt(9 - 0);
+	   y = 0 + r.nextInt(9 - 0);
+   	for (i=0;i<5;i++) {
+   		if (this.bateaux[i]!=null) {
+   			for (j=0;j<this.bateaux[i].get_taille();j++) {
+   				if ( x==this.bateaux[i].cases_ocupees()[j][0] && y==this.bateaux[i].cases_ocupees()[j][1] ) {
+   					this.bateaux[i].hit(j);
+   					this.peut_bouger=false;
+   					if (this.bateaux[i].doit_couler()) {
+   						this.bateaux[i]=null;
+   						return 2;//COULÉ!
+   					} else {
+   						return 1; //TOUCHÉ!
+   					}
+   				}
+   		}
+   	}
+   	}
+   	return 0; // DANS L'EAU!
+   }
+   public Boat select_bateau() {//TODO: D�placer dans Joueur_humain 
+       int i=0, j=0;
+       int x=0, y=0;      
+       Random r = new Random();      
+	   x = 0 + r.nextInt(9 - 0);
+	   y = 0 + r.nextInt(9 - 0);
+         for (i=0;i<5;i++){ 
+           for (j=0;j<this.bateaux[i].get_taille();j++){ 
+             if (x==this.bateaux[i].cases_ocupees()[j][0] && y==this.bateaux[i].cases_ocupees()[j][1]){ 
+               return this.bateaux[i]; 
+             } 
+           } 
+         }    
+         return null; 
+     }
+   
+   public void bouger_ia(Boat b){
+	   int x=0, y=0;
+	   int pos[] = {x,y};
+       Random r = new Random();      
+	   x = 0 + r.nextInt(9 - 0);
+	   y = 0 + r.nextInt(9 - 0);      
+       b.set_position(pos); 
+       return ; 
+     }
+     
+   
+   
  
  
       public boolean check_collision (Boat b){ 
