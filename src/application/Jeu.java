@@ -311,6 +311,14 @@ public class Jeu{
 		{
 			if(this.etapeJeu==0)
 				j2.placer_bateau_ia();
+			else { 
+				if(j2.get_peut_bouger()) {
+				do {
+				this.bateauTemp=j2.select_bateau();			
+			}while(this.bateauTemp==null);
+				j2.bouger_ia(this.bateauTemp);
+			}
+		}
 		}
 			
 		
