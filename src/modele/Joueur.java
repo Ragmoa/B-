@@ -223,10 +223,19 @@ public void setCases_portee(int[][]cases_portee) {
    
    public void bouger_ia(Boat b){
 	   int x=0, y=0;
-	   int pos[] = {x,y};
+	   int pos[] = new int [2];
        Random r = new Random();      
 	   x = -2 + r.nextInt(4 - 0);
-	   y =  if(Math.abs(x))+ r.nextInt(9 - 0);      
+	   if(Math.abs(x)==2){
+		   y= 0;      
+	   }
+	   else if (Math.abs(x)==1){
+		   y= -1 + r.nextInt(2 - 0);
+	   } else {
+		   y= -2 + r.nextInt(4 - 0);
+	   }
+	   pos[0]=x;
+	   pos[1]=y;
        b.set_position(pos); 
        return ; 
      }
