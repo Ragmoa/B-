@@ -355,12 +355,12 @@ public class Jeu{
         texteJoueurAct.setText(j_actuel.getPseudo());
         
         texteEtapeJeu.setId("etapeJeu");
-        texteEtapeJeu.setText(" | Placez vos bateaux");
+        texteEtapeJeu.setText(" | Placez vos bateaux \n | clic droit pour changer l'orientation");
         texteEtapeJeu.setTextFill(Color.WHITE);
         texteStatut.setPadding(new Insets(0, 0, 0, 20)); //haut,droit,bas,gauche
         
         texteStatut.setId("statut");
-        texteStatut.setText(" | En attente...");
+        texteStatut.setText(" | Bateau horizontal");
         texteStatut.setTextFill(Color.WHITE);
         texteStatut.setPadding(new Insets(0, 0, 0, 40)); //haut,droit,bas,gauche
         
