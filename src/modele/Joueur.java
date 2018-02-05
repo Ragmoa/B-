@@ -13,6 +13,7 @@ public class Joueur {
   private int[][] status; //0=rien, -1=rate, 1=touche
   private int[][] cases_joueur;
   private int[][] cases_portee;
+  private boolean horizontal;
   
  
   public Joueur(String pseudo, boolean ia) {
@@ -30,6 +31,7 @@ public class Joueur {
     		this.status[i][j]=0;
     	}
     }
+    this.horizontal = true;
   }
 
   public int[][] get_status(){
@@ -38,6 +40,13 @@ public class Joueur {
   
   public void set_status( int x, int y, int st) {
 	  this.status[x][y]=st;
+  }
+  public boolean get_horizontal(){
+	  return this.horizontal;
+  }
+  
+  public void set_horizontal(boolean horizontal) {
+	  this.horizontal=horizontal;
   }
   
   public String getPseudo() { 
@@ -112,22 +121,25 @@ public void setCases_portee(int[][]cases_portee) {
    public int placer_bateau(int x , int y, int i, boolean horizontal){
 	   
 	   int pos[] = {x,y};
-	   Boat b = new Boat(5,2,true,pos); 
-    		   if(i==0 && (b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() )) {	   
-    			   bateaux[0]=new Boat(5,2,true,pos);
+	   Boat b = new Boat(5,2,horizontal,pos); 
+    		   if(i==0 && ((b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ))){	   
+    			   bateaux[0]=new Boat(5,2,horizontal,pos);
     			   i++;
     		   }
-    		   else if(i==1)b=new Boat(4,2,true,pos);
-    		   else if(i==2)b=new Boat(3,2,true,pos);
-    		   else if(i==3)b=new Boat(3,4,true,pos);
-    		   else if(i==4)b=new Boat(2,5,true,pos);
-    		   if(i!=0 && !check_collision(b) && (b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ) ){
-    			   if(i==1)bateaux[1]=new Boat(4,2,true,pos);
-    			   else if(i==2)bateaux[2]=new Boat(3,2,true,pos);
-    			   else if(i==3)bateaux[3]=new Boat(3,4,true,pos);
-    			   else if(i==4)bateaux[4]=new Boat(2,5,true,pos);
+    		   else if(i==1)b=new Boat(4,2,horizontal,pos);
+    		   else if(i==2)b=new Boat(3,2,horizontal,pos);
+    		   else if(i==3)b=new Boat(3,4,horizontal,pos);
+    		   else if(i==4)b=new Boat(2,5,horizontal,pos);
+    		   
+    		   if(i!=0 && !check_collision(b) && ((b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ) )){
+    			   
+    			   if(i==1)bateaux[1]=new Boat(4,2,horizontal,pos);
+    			   else if(i==2)bateaux[2]=new Boat(3,2,horizontal,pos);
+    			   else if(i==3)bateaux[3]=new Boat(3,4,horizontal,pos);
+    			   else if(i==4)bateaux[4]=new Boat(2,5,horizontal,pos);
     			   i++;
     		   }
+    		   
     		   return i;
     		 }
  
