@@ -45,16 +45,16 @@ public class PanelVictoire {
 		boxVictoire.getChildren().add(gagnant);
 		gridVictoire.add(boxVictoire, 0, 0);
 		
-		HBox boxMenu = new HBox(20);
-		menuPrincipal = new Button("MENU PRINCIPAL");
-		menuPrincipal.setId("menuPrincipal");
-		menuPrincipal.setPrefWidth(300);
-		menuPrincipal.setOnMouseClicked((event) -> {
-			primaryStage.setScene(sceneMenu);
-		});
-		boxMenu.getChildren().add(menuPrincipal);
-		boxMenu.setAlignment(Pos.CENTER);
-		gridVictoire.add(boxMenu, 0, 4);
+//		HBox boxMenu = new HBox(20);
+//		menuPrincipal = new Button("MENU PRINCIPAL");
+//		menuPrincipal.setId("menuPrincipal");
+//		menuPrincipal.setPrefWidth(300);
+//		menuPrincipal.setOnMouseClicked((event) -> {
+//			primaryStage.setScene(sceneMenu);
+//		});
+//		boxMenu.getChildren().add(menuPrincipal);
+//		boxMenu.setAlignment(Pos.CENTER);
+//		gridVictoire.add(boxMenu, 0, 4);
 
 		primaryStage.setScene(scene);
 	}
