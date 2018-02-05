@@ -208,6 +208,7 @@ public void setCases_portee(int[][]cases_portee) {
         		}
         	}
         	}
+        	this.peut_bouger=true;
         	return 0; // DANS L'EAU!
         }
         public int[][] get_player_boat(){
