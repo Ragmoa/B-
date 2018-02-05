@@ -4,4 +4,4 @@
 
 Développé dans le cadre du cours 8INF957 (Programmation Orientée Objet) de l'UQAC.
 
-Le jeu peut se jouer entre joueur contre joueur ou joueur contre IA.
+Un JAR contenant le code compilé est disponible dans le dossier Release
