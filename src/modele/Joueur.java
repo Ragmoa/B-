@@ -263,6 +263,7 @@ public void setCases_portee(int[][]cases_portee) {
         }
         
         public int[][] get_player_range(){
+        	//System.out.println("-----");
         	int taille=0;
          	for(int i=0;i<5;i++)
          	{   
@@ -278,12 +279,18 @@ public void setCases_portee(int[][]cases_portee) {
          	for(int i=0;i<5;i++) {
          		if(bateaux[i]!=null) {
 	         		for(int j=0;j<bateaux[i].cases_portee().length;j++) {
-	         			if(bateaux[i].cases_portee()[j]==null)k++;
+	         			if(bateaux[i].cases_portee()[j]==null) {
+	         				cases[k]=null;
+	         				k++;
+	         			}
 	         			else
 	         			{
 	         				cases[k][0]=bateaux[i].cases_portee()[j][0];
 	         				cases[k][1]=bateaux[i].cases_portee()[j][1];
-	         				k++;      			
+		         			/*System.out.print(cases[k][0]);
+		         			System.out.print(" , ");
+		         			System.out.println(cases[k][1]);*/
+	         				k++;
 		         		}
 		         	}
          		}
