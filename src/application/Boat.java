@@ -68,7 +68,7 @@ public class Boat {
       int i=0, j=0;
       for (i=0;i<(2*portee)+1;i++){
         if (this.horizontal){ // BATEAEU HORIZONTAL
-          if(this.position[1]-portee+i>0 && this.position[1]-portee+i<10){// CASES VALIDES
+          if(this.position[1]-portee+i>=0 && this.position[1]-portee+i<10){// CASES VALIDES
             for (j=0;j<taille;j++){
               cases[i*taille+j][0]=this.position[0]+j;
               cases[i*taille+j][1]=this.position[1]-portee+i;
@@ -79,7 +79,7 @@ public class Boat {
             }
           }
         }else{// BATEAU VERTICAL
-          if (this.position[0]-portee+i>0 && this.position[0]-portee+i<10){//CASES VALIDES
+          if (this.position[0]-portee+i>=0 && this.position[0]-portee+i<10){//CASES VALIDES
             for (j=0;j<taille;j++){
               cases[i*taille+j][0]=this.position[0]-portee+i;
               cases[i*taille+j][1]=this.position[1]+j;
