@@ -131,7 +131,6 @@ public class Jeu{
 		switch(this.getEtapeJeu()) {
 		case 0 : //placement bateau d�but partie
 			if(playerSide==true){
-				panel.majPanel(colonne, ligne, Content.boat_range);
 				j_actuel.setBateauplace(j_actuel.placer_bateau(colonne, ligne, j_actuel.getBateauplace(), true));
 				j_actuel.setCases_joueur(j_actuel.get_player_boat()); 
 			       
@@ -201,24 +200,6 @@ public class Jeu{
 			break;
 		case 3 : //attente avant de changer de joueur
 			if(playerSide==false) {
-				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
-			        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
-		        }
-				 for(int i=0;i<j_actuel.get_player_range().length;i++) { 
-			          //System.out.println(j_actuel.getCases_portee()[i][0] + " " + j_actuel.getCases_portee()[i][1]); 
-			              panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range);  
-			              } 
-				int[][] caseTouchee;
-				for(int i=0; i<5; i++) {
-					caseTouchee=j_actuel.cases_touchees(i);
-					if(caseTouchee!=null && caseTouchee[0]!=null) {
-				        autrePanel.majPanel(caseTouchee[0][0], caseTouchee[0][1], Content.boat_hit);	
-						if(caseTouchee[1]!=null) {
-					        autrePanel.majPanel(caseTouchee[1][0], caseTouchee[1][1], Content.boat_hit);	
-						}
-					}
-					caseTouchee=null;
-				}
 				//On replace les hit/miss pour la suite
 				int tableauDroite[][]=j_actuel.get_status();
 				for(int i=0; i<10; i++) {
@@ -230,6 +211,31 @@ public class Jeu{
 							panel.majPanel(i, j, Content.hit);
 						}
 					}
+				}
+				//On place la range
+				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
+			        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
+		        }
+				for(int i=0;i<j_actuel.get_player_range().length;i++) {  
+					panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range); 
+					if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==-1) {	 
+						panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_miss);
+					}
+					else if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==1) {	 
+						panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_hit);
+					}
+				}
+				//Et les cases touchees
+				int[][] caseTouchee;
+				for(int i=0; i<5; i++) {
+					caseTouchee=j_actuel.cases_touchees(i);
+					if(caseTouchee!=null && caseTouchee[0]!=null) {
+				        autrePanel.majPanel(caseTouchee[0][0], caseTouchee[0][1], Content.boat_hit);	
+						if(caseTouchee[1]!=null) {
+					        autrePanel.majPanel(caseTouchee[1][0], caseTouchee[1][1], Content.boat_hit);	
+						}
+					}
+					caseTouchee=null;
 				}
 				this.etapeJeu=1;
 			}
@@ -284,10 +290,12 @@ public class Jeu{
         texteEtapeJeu.setId("etapeJeu");
         texteEtapeJeu.setText(" | Placez vos bateaux");
         texteEtapeJeu.setTextFill(Color.WHITE);
+        texteStatut.setPadding(new Insets(0, 0, 0, 10)); //haut,droit,bas,gauche
         
         texteStatut.setId("statut");
         texteStatut.setText(" | En attente...");
         texteStatut.setTextFill(Color.WHITE);
+        texteStatut.setPadding(new Insets(0, 0, 0, 40)); //haut,droit,bas,gauche
         
 	    hbox.getChildren().addAll(texteJoueurAct);
 	    hbox.getChildren().addAll(texteEtapeJeu);
@@ -305,10 +313,10 @@ public class Jeu{
 			texteEtapeJeu.setText(" | Choisissez votre cible");
 			break;
 		case 2 : //attente apres tir
-			texteEtapeJeu.setText(" | Cliquez sur une case � droite pour finir le tour");
+			texteEtapeJeu.setText(" | Cliquez sur une case a \n | droite pour finir le tour");
 			break;
 		case 3 : //attente avant de changer de joueur
-			texteEtapeJeu.setText(" | Cliquez sur une case � droite pour commencer");
+			texteEtapeJeu.setText(" | Cliquez sur une case a \n | droite pour commencer");
 			break;
 		case 4 : //deplacement d'un bateau
 			texteEtapeJeu.setText(" | Deplacez un bateau");
@@ -322,10 +330,10 @@ public class Jeu{
 			texteStatut.setText(" | En attente...");
 			break;
 		case 1 : 
-			texteStatut.setText(" | Tir r�ussi !");
+			texteStatut.setText(" | Tir reussi !");
 			break;
 		case 2 :
-			texteStatut.setText(" | Tir rat�...");
+			texteStatut.setText(" | Tir rate...");
 			break;
 		case 3 :
 			texteStatut.setText(" | Changement de joueur");
