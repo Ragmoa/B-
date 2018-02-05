@@ -370,7 +370,7 @@ public class Jeu{
 			texteEtapeJeu.setText(" | Cliquez sur une case a \n | droite pour commencer");
 			break;
 		case 4 : //choix d'un bateau
-			texteEtapeJeu.setText(" | Choisissez un bateau a \n | déplacer");
+			texteEtapeJeu.setText(" | Choisissez un bateau a \n | dï¿½placer");
 			break;
 		case 5 : //choix du mouvement
 			texteEtapeJeu.setText(" | Choisissez sa position");
