@@ -235,13 +235,13 @@ public class Jeu{
 				j_actuel.bouger(this.bateauTemp, colonne, ligne);
 				for(int i=0;i<bateauTemp.get_taille();i++) { 
 					if (this.bateauTemp.is_hit(i)) {
-						panel.majPanel(bateauTemp.cases_ocupees()[i][0], bateauTemp.cases_ocupees()[i][1], Content.boat_hit);
+						panel.majPanel(bateauTemp.cases_ocupees()[i][0], bateauTemp.cases_ocupees()[i][1], Content.boat_hit);//Ne marche pas non plus... étrange.
 					} else {
 						panel.majPanel(bateauTemp.cases_ocupees()[i][0], bateauTemp.cases_ocupees()[i][1], Content.boat);
 					}
 			    } 
 				//On place les cases bateau touche
-				//majBoatHit(panel);
+				//majBoatHit(panel); // Ne marche pas... bizarre
 				//On met à jour la portée
 				autrePanel.resetPanel();
 				majHitMissRange(autrePanel, panel);
