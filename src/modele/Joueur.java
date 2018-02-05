@@ -146,9 +146,12 @@ public void setCases_portee(int[][]cases_portee) {
     		 }
    public void placer_bateau_ia() {
 	   int i=0, x=0, y=0;
-	   int pos[] = {x,y};
+	   int pos[] = new int[2];
 	   Boat b = new Boat(5,2,horizontal,pos);
 	   do {
+		   pos = new int[2];
+		 //System.out.print("new boucle");
+		  // System.out.println( i);
 		   Random r = new Random();
 		   x = 0 + r.nextInt(9 - 0);
 		   y = 0 + r.nextInt(9 - 0);
@@ -156,7 +159,8 @@ public void setCases_portee(int[][]cases_portee) {
 		   pos[1]=y;
 		   
     		   if(i==0 && ((b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ))){	   
-    			   bateaux[0]=new Boat(5,2,horizontal,pos);   
+    			   bateaux[0]=new Boat(5,2,horizontal,pos);
+    			   //System.out.println(x+" "+y + " " + i);
     		   }
     		   else if(i==1)b=new Boat(4,2,horizontal,pos);
     		   else if(i==2)b=new Boat(3,2,horizontal,pos);
@@ -164,7 +168,8 @@ public void setCases_portee(int[][]cases_portee) {
     		   else if(i==4)b=new Boat(2,5,horizontal,pos);
     		   System.out.println(pos[0]+" "+pos[1] + " " + i);
     		   
-    		   if(i!=0 && check_collision(b) && ((b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ) )){
+    		   if(i!=0 && !check_collision(b) && ((b.get_taille()+x <= 10 && b.is_horizontal()) || (b.get_taille()+y <= 10 && !b.is_horizontal() ) )){
+    			   //System.out.println(x+" "+y + " " + i);
     			   if(i==1)bateaux[1]=new Boat(4,2,horizontal,pos);
     			   else if(i==2)bateaux[2]=new Boat(3,2,horizontal,pos);
     			   else if(i==3)bateaux[3]=new Boat(3,4,horizontal,pos);
@@ -225,10 +230,6 @@ public void setCases_portee(int[][]cases_portee) {
        b.set_position(pos); 
        return ; 
      }
-     
-   
-   
- 
  
       public boolean check_collision (Boat b){ 
         int i=0, j=0,k=0; 
@@ -236,7 +237,7 @@ public void setCases_portee(int[][]cases_portee) {
           if (this.bateaux[i]!=null){ 
             for (j=0;j<this.bateaux[i].get_taille();j++){ 
               for (k=0;k<b.get_taille();k++){ 
-                if (b.cases_ocupees()[k][0]==this.bateaux[i].cases_ocupees()[j][0] && b.cases_ocupees()[k][1]==this.bateaux[i].cases_ocupees()[j][1]){ 
+                if (b.cases_ocupees()[k][0]==this.bateaux[i].cases_ocupees()[j][0] && b.cases_ocupees()[k][1]==this.bateaux[i].cases_ocupees()[j][1]){
                   return true; 
                 } 
               } 
