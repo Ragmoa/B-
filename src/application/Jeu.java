@@ -210,36 +210,8 @@ public class Jeu{
 			break;
 		case 3 : //attente avant de changer de joueur
 			if(playerSide==false) {
-				//On replace les hit/miss pour la suite
-				int tableauDroite[][]=j_actuel.get_status();
-				for(int i=0; i<10; i++) {
-					for(int j=0; j<10; j++) {
-						if(tableauDroite[i][j]==-1) {
-							panel.majPanel(i, j, Content.miss);
-						}
-						else if(tableauDroite[i][j]==1) {
-							panel.majPanel(i, j, Content.hit);
-						}
-					}
-				}
-				//On place la range
-				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
-			        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
-		        }
-				for(int i=0;i<j_actuel.get_player_range().length;i++) {  
-				 	if (j_actuel.get_player_range()[i]!=null) {
-						if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==-1) {	 
-							panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_miss);
-						}
-						else if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==1) {	 
-							panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_hit);
-						}
-						else{
-							panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range); 
-						} 
-				 	}
-				}
-				//Et les cases touchees
+				majHitMissRange(panel, autrePanel);
+				//On place les cases bateau touche
 				int[][] caseTouchee;
 				for(int i=0; i<5; i++) {
 					caseTouchee=j_actuel.cases_touchees(i);
@@ -269,14 +241,19 @@ public class Jeu{
 			}
 			break;
 		case 5 : //deplacement d'un bateau - choix du mouvement
-			System.out.println("5");
-			if(playerSide==true) {
+			if(playerSide==true && !j_actuel.check_collision(this.bateauTemp, colonne, ligne) 
+				&& ((this.bateauTemp.get_taille()+colonne <= 10 && this.bateauTemp.is_horizontal()) || 
+				(bateauTemp.get_taille()+ligne <= 10 && !bateauTemp.is_horizontal()) )) {
+				for(int i=0; i<bateauTemp.cases_ocupees().length; i++) {
+					panel.majPanel(bateauTemp.cases_ocupees()[i][0], bateauTemp.cases_ocupees()[i][1], Content.sea);
+				}
 				j_actuel.bouger(this.bateauTemp, colonne, ligne);
 				for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
 			    	panel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
 			    	
 			    } 
-				System.out.println("5 ok");
+				autrePanel.resetPanel();
+				majHitMissRange(autrePanel, panel);
 				this.etapeJeu=1;
 			}
 			break;
@@ -299,6 +276,8 @@ public class Jeu{
 			break;
 		default :
 			break;
+		case 5 :
+			break;
 		}
 	}
 	
@@ -309,6 +288,39 @@ public class Jeu{
 		}
 		else {
 			j_actuel=j1;
+		}
+	}
+	
+	//A appeler uniquement avec le panel
+	public void majHitMissRange(PanelJeu panel, PanelJeu autrePanel) {
+		//On replace les hit/miss pour la suite
+		int tableauDroite[][]=j_actuel.get_status();
+		for(int i=0; i<10; i++) {
+			for(int j=0; j<10; j++) {
+				if(tableauDroite[i][j]==-1) {
+					panel.majPanel(i, j, Content.miss);
+				}
+				else if(tableauDroite[i][j]==1) {
+					panel.majPanel(i, j, Content.hit);
+				}
+			}
+		}
+		//On place la range
+		for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
+	        autrePanel.majPanel(j_actuel.get_player_boat()[i][0], j_actuel.get_player_boat()[i][1], Content.boat);
+        }
+		for(int i=0;i<j_actuel.get_player_range().length;i++) {  
+		 	if (j_actuel.get_player_range()[i]!=null) {
+				if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==-1) {	 
+					panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_miss);
+				}
+				else if(tableauDroite[j_actuel.get_player_range()[i][0]][j_actuel.get_player_range()[i][1]]==1) {	 
+					panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range_and_hit);
+				}
+				else{
+					panel.majPanel(j_actuel.get_player_range()[i][0], j_actuel.get_player_range()[i][1], Content.boat_range); 
+				} 
+		 	}
 		}
 	}
 	
