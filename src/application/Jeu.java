@@ -1,4 +1,4 @@
-package application;
+ package application;
 
 
 import javafx.geometry.Insets;
@@ -133,7 +133,7 @@ public class Jeu{
 		switch(this.getEtapeJeu()) {
 		case 0 : //placement bateau dï¿½but partie
 			if(playerSide==true){
-				j_actuel.setBateauplace(j_actuel.placer_bateau(colonne, ligne, j_actuel.getBateauplace(), true));
+				j_actuel.setBateauplace(j_actuel.placer_bateau(colonne, ligne, j_actuel.getBateauplace(),j_actuel.get_horizontal()));
 				j_actuel.setCases_joueur(j_actuel.get_player_boat()); 
 			       
 			    for(int i=0;i<j_actuel.get_player_boat().length;i++) { 
@@ -264,7 +264,10 @@ public class Jeu{
 	
 	public void clicDroit(PanelJeu panel, int colonne, int ligne, boolean playerSide, PanelJeu autrePanel) {
 		switch(this.getEtapeJeu()) {
-		case 0:
+		case 0:if(j_actuel.get_horizontal()==true)j_actuel.set_horizontal(false);
+			
+			else j_actuel.set_horizontal(true);
+			this.etapeJeu=0;
 			break;
 		case 1 :
 			break;
@@ -367,7 +370,7 @@ public class Jeu{
 			texteEtapeJeu.setText(" | Cliquez sur une case a \n | droite pour commencer");
 			break;
 		case 4 : //choix d'un bateau
-			texteEtapeJeu.setText(" | Choisissez un bateau a \n | déplacer");
+			texteEtapeJeu.setText(" | Choisissez un bateau a \n | dï¿½placer");
 			break;
 		case 5 : //choix du mouvement
 			texteEtapeJeu.setText(" | Choisissez sa position");
